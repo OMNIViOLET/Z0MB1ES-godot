@@ -46,6 +46,7 @@ align = 1
 flashing = true
 
 [node name="Subtitle" parent="TitleContainer" instance=ExtResource( 3 )]
+visible = false
 margin_top = 235.0
 margin_right = 1280.0
 margin_bottom = 265.0
@@ -77,6 +78,7 @@ anchor_bottom = 0.0
 margin_left = 380.0
 margin_right = 620.0
 margin_bottom = 110.0
+slot = 1
 
 [node name="PlayerBox3" parent="PlayerContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
@@ -84,6 +86,7 @@ anchor_bottom = 0.0
 margin_left = 660.0
 margin_right = 900.0
 margin_bottom = 110.0
+slot = 2
 
 [node name="PlayerBox4" parent="PlayerContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
@@ -91,6 +94,7 @@ anchor_bottom = 0.0
 margin_left = 940.0
 margin_right = 1180.0
 margin_bottom = 110.0
+slot = 3
 
 [node name="ButtonContainer" type="GridContainer" parent="."]
 anchor_left = 0.5
