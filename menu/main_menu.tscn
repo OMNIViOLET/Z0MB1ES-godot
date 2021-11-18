@@ -1,10 +1,157 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://menu/main_menu.gd" type="Script" id=1]
+[ext_resource path="res://ui/imagwzii_text_large.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/imagwzii_text_medium.tscn" type="PackedScene" id=3]
+[ext_resource path="res://menu/player_box.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/font/imagwzii_6.fnt" type="BitmapFont" id=5]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-current = true
+[node name="TitleContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+margin_top = 50.0
+margin_bottom = 255.0
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title1" parent="TitleContainer" instance=ExtResource( 2 )]
+margin_right = 1280.0
+margin_bottom = 60.0
+text = "I MAED A GAM3 W1TH"
+align = 1
+flashing = true
+
+[node name="Title2" parent="TitleContainer" instance=ExtResource( 2 )]
+margin_top = 90.0
+margin_right = 1280.0
+margin_bottom = 150.0
+text = "Z0MBIES 1N IT!!!1"
+align = 1
+flashing = true
+
+[node name="Spacer" parent="TitleContainer" instance=ExtResource( 3 )]
+margin_top = 180.0
+margin_right = 1280.0
+margin_bottom = 205.0
+align = 1
+flashing = true
+
+[node name="Subtitle" parent="TitleContainer" instance=ExtResource( 3 )]
+margin_top = 235.0
+margin_right = 1280.0
+margin_bottom = 265.0
+custom_fonts/font = ExtResource( 5 )
+text = "(IT'S A TW1N ST1CK SH00T3R)"
+align = 1
+flashing = true
+
+[node name="PlayerContainer" type="HBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerBox1" parent="PlayerContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 100.0
+margin_right = 340.0
+margin_bottom = 110.0
+
+[node name="PlayerBox2" parent="PlayerContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 380.0
+margin_right = 620.0
+margin_bottom = 110.0
+
+[node name="PlayerBox3" parent="PlayerContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 660.0
+margin_right = 900.0
+margin_bottom = 110.0
+
+[node name="PlayerBox4" parent="PlayerContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 940.0
+margin_right = 1180.0
+margin_bottom = 110.0
+
+[node name="ButtonContainer" type="GridContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -400.0
+margin_top = -170.0
+margin_right = 400.0
+margin_bottom = -95.0
+custom_constants/vseparation = 25
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OK" parent="ButtonContainer" instance=ExtResource( 3 )]
+modulate = Color( 0, 1, 0, 1 )
+margin_right = 185.0
+margin_bottom = 25.0
+text = "(A) ok"
+align = 1
+
+[node name="Spacer" parent="ButtonContainer" instance=ExtResource( 3 )]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = 189.0
+margin_right = 576.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="Cancel" parent="ButtonContainer" instance=ExtResource( 3 )]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 580.0
+margin_right = 800.0
+margin_bottom = 25.0
+text = "(B) cancel"
+align = 1
+
+[node name="Scores" parent="ButtonContainer" instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 0, 1 )
+margin_top = 50.0
+margin_right = 185.0
+margin_bottom = 75.0
+text = "(Y) scores"
+align = 1
+
+[node name="Spacer2" parent="ButtonContainer" instance=ExtResource( 3 )]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = 189.0
+margin_top = 50.0
+margin_right = 576.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="Settings" parent="ButtonContainer" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = 580.0
+margin_top = 50.0
+margin_right = 800.0
+margin_bottom = 75.0
+text = "(X) settings"
+align = 1

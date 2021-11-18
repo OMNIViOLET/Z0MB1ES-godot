@@ -9,25 +9,37 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "Label",
+"class": "IMAGWZIIText",
+"language": "GDScript",
+"path": "res://ui/imagwzii_text.gd"
+}, {
+"base": "IMAGWZIIText",
+"class": "IMAGWZIITextLarge",
+"language": "GDScript",
+"path": "res://ui/imagwzii_text_large.gd"
+}, {
+"base": "IMAGWZIIText",
+"class": "IMAGWZIITextMedium",
+"language": "GDScript",
+"path": "res://ui/imagwzii_text_medium.gd"
+}, {
+"base": "IMAGWZIIText",
+"class": "IMAGWZIITextSmall",
+"language": "GDScript",
+"path": "res://ui/imagwzii_text_small.gd"
+}, {
+"base": "Control",
 "class": "MainMenu",
 "language": "GDScript",
 "path": "res://menu/main_menu.gd"
-}, {
-"base": "Reference",
-"class": "TextShape",
-"language": "GDScript",
-"path": "res://text/text_shape.gd"
-}, {
-"base": "Node2D",
-"class": "TextString",
-"language": "GDScript",
-"path": "res://text/text_string.gd"
 } ]
 _global_script_class_icons={
-"MainMenu": "",
-"TextShape": "",
-"TextString": ""
+"IMAGWZIIText": "",
+"IMAGWZIITextLarge": "",
+"IMAGWZIITextMedium": "",
+"IMAGWZIITextSmall": "",
+"MainMenu": ""
 }
 
 [application]
@@ -40,8 +52,6 @@ config/icon="res://icon.png"
 [autoload]
 
 Arrays="*res://util/arrays.gd"
-Text="*res://text/text.gd"
-Colors="*res://util/colors.gd"
 
 [display]
 
