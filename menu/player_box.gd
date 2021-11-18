@@ -35,7 +35,7 @@ func update_player_box():
 			if info.device_type == PlayerInfo.DeviceType.JOYPAD:
 				_text2.text = "press (A)!"
 			else:
-				_text2.text = "press (ENTER)!"
+				_text2.text = "press (enter)!"
 			_text2.flashing = true
 		PlayerInfo.PlayerState.READY:
 			_text1.text = "READY!!!1"
@@ -45,7 +45,7 @@ func update_player_box():
 
 func _on_slot_updated(slot: int):
 	if self.slot != slot: 
-		return	
+		return
 	update_player_box()
 
 

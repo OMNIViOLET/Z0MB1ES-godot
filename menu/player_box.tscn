@@ -16,9 +16,9 @@ __meta__ = {
 }
 
 [node name="PlayerName" parent="." instance=ExtResource( 1 )]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_right = 240.0
 margin_bottom = 25.0
-custom_colors/font_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 text = "player"
 align = 1
 

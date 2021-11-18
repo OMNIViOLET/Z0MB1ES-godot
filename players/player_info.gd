@@ -12,7 +12,7 @@ enum PlayerState {
 }
 
 var color = Color.white
-var device_id = 0
+var device_id = -1
 var device_type = DeviceType.KEYBOARD
 var player_name = "player"
 var player_state = PlayerState.OUT
@@ -35,5 +35,6 @@ func unready_player():
 	match player_state:
 		PlayerState.IN:
 			player_state = PlayerState.OUT
+			set_device(-1, DeviceType.KEYBOARD)
 		PlayerState.READY:
 			player_state = PlayerState.IN
