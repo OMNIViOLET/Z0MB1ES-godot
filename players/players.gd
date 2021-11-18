@@ -81,15 +81,21 @@ func is_any_slot_filled() -> bool:
 	return false
 
 
-func is_slot_ready(slot: int) -> bool:
-	return players[slot].player_state == PlayerInfo.PlayerState.READY
+func get_slot_state(slot: int) -> int:
+	return players[slot].player_state
 
 
 func all_slots_ready() -> bool:
-	var ready = true
+	var any_ready = false
+	var all_ready = true
+	
 	for i in MAX_PLAYERS:
-		ready = ready and is_slot_ready(i)
-	return ready
+		var ready = get_slot_state(i) == PlayerInfo.PlayerState.READY
+		if ready:
+			any_ready = true
+		all_ready = all_ready and ready
+	
+	return any_ready and all_ready
 
 
 func _on_slot_updated(slot: int):
