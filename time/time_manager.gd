@@ -20,6 +20,8 @@ enum Phase {
 	END
 }
 
+export(NodePath) var music_manager_path
+
 var _phase = Phase.INTRO_THEME
 var _play_mode = PlayMode.STOPPED
 var _start_time = 0.0
@@ -28,11 +30,14 @@ var _time = 0.0
 var _time_slices = []
 var _pulse = 0.0
 var _beat = 0
-var _quad_beat = 0
-var _octo_beat = 0
+var _quadbeat = 0
+var _octobeat = 0
 var _track_time = 0.0
 var _track_left = 0.0
 var _play_num = 0
+var _offset = 0.0
+
+onready var _music_manager := get_node(music_manager_path)
 
 
 func _init():
@@ -41,14 +46,14 @@ func _init():
 
 func _process(delta):
 	if _play_mode != PlayMode.PLAYING:
-		return	
+		return
 	
 	var prev_beat = _beat
 	var prev_time = _time
 	
 	var now = OS.get_ticks_msec()
 	var diff = now - _start_time
-	_time = float(diff) / 1000.0
+	_time = (float(diff) / 1000.0) + _offset
 
 	for i in _time_slices.size():
 		if _time_slices[i].start < _time:
@@ -66,12 +71,12 @@ func _process(delta):
 	
 	_pulse /= beat_time
 	
-	_quad_beat = _beat * 4 + int(_pulse * 4.0)
-	_octo_beat = _beat * 8 + int(_pulse * 8.0)
+	_quadbeat = _beat * 4 + int(_pulse * 4.0)
+	_octobeat = _beat * 8 + int(_pulse * 8.0)
 	
 	_track_time = _time - current_slice.start
 	if _phase < _time_slices.size() - 1:
-		_track_left = current_slice.start - _time
+		_track_left = _time_slices[_phase + 1].start - _time
 	else:
 		_track_left = 0.0
 	
@@ -84,9 +89,40 @@ func _process(delta):
 				_on_beat(Phase.INTRO_THEME, 0)
 
 
+func get_beat() -> int:
+	return _beat
+
+
+func get_quadbeat() -> int:
+	return _quadbeat
+
+
+func get_octobeat() -> int:
+	return _octobeat
+
+
+func get_phase() -> int:
+	return _phase
+
+
+func get_track_left() -> float:
+	print("track_left: ", _track_left)
+	return _track_left
+
+
+func get_track_time() -> float:
+	return _track_time
+
+
+func can_start_playing() -> bool:
+	return _play_num == 0
+
+
 func start():
 	_beat = -1
 	_phase = Phase.INTRO_THEME
+	_offset = _time_slices[Phase.METAL].start
+	_music_manager.seek(_offset)
 	_start_time = OS.get_ticks_msec()
 	_time = 0.0
 	_play_mode = PlayMode.PLAYING
@@ -96,14 +132,14 @@ func start():
 func pause():
 	_pause_start_time = OS.get_ticks_msec()
 	_play_mode = PlayMode.PAUSED
-	# TODO: Pause music
+	_music_manager.pause()
 
 
 func resume():
 	var diff = OS.get_ticks_msec() - _pause_start_time
 	_start_time += diff
 	_play_mode = PlayMode.PLAYING
-	# TODO: Resume music
+	_music_manager.resume()
 
 
 func _create_time_slices():

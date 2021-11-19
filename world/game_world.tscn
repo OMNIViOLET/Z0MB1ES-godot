@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://time/time_manager.gd" type="Script" id=1]
 [ext_resource path="res://world/game_world.gd" type="Script" id=2]
+[ext_resource path="res://audio/music_manager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://map/map.tscn" type="PackedScene" id=4]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 2 )
@@ -10,7 +12,17 @@ script = ExtResource( 2 )
 
 [node name="TimeManager" type="Node" parent="Managers"]
 script = ExtResource( 1 )
+music_manager_path = NodePath("../MusicManager")
+
+[node name="MusicManager" parent="Managers" instance=ExtResource( 3 )]
+time_manager_path = NodePath("../TimeManager")
+
+[node name="Map" parent="." instance=ExtResource( 4 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 640, 360 )
+offset = Vector2( 384, 216 )
 current = true
+limit_left = 0
+limit_top = 0
+limit_right = 2048
+limit_bottom = 1152

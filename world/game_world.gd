@@ -3,4 +3,8 @@ class_name GameWorld
 
 
 func _ready():
-	pass
+	$Managers/TimeManager.connect("beat", self, "_on_beat")
+
+
+func _on_beat(phase: int, beat: int):
+	print("phase: ", phase, "/beat: ", beat)
