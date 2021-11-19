@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "GameWorld",
+"language": "GDScript",
+"path": "res://world/game_world.gd"
+}, {
 "base": "Label",
 "class": "IMAGWZIIText",
 "language": "GDScript",
@@ -48,8 +53,19 @@ _global_script_classes=[ {
 "class": "Quit",
 "language": "GDScript",
 "path": "res://menu/quit.gd"
+}, {
+"base": "Node",
+"class": "TimeManager",
+"language": "GDScript",
+"path": "res://time/time_manager.gd"
+}, {
+"base": "Reference",
+"class": "TimeSlice",
+"language": "GDScript",
+"path": "res://time/time_slice.gd"
 } ]
 _global_script_class_icons={
+"GameWorld": "",
 "IMAGWZIIText": "",
 "IMAGWZIITextLarge": "",
 "IMAGWZIITextMedium": "",
@@ -57,7 +73,9 @@ _global_script_class_icons={
 "MainMenu": "",
 "PlayerBox": "",
 "PlayerInfo": "",
-"Quit": ""
+"Quit": "",
+"TimeManager": "",
+"TimeSlice": ""
 }
 
 [application]
