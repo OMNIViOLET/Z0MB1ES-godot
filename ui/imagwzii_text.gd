@@ -19,6 +19,9 @@ func _process(_delta):
 
 
 func _set_flashing(value: bool):
+	if flashing == value:
+		return
+	
 	flashing = value
 	if flashing:
 		_original_color = modulate
@@ -36,5 +39,5 @@ func _get_random_color(from: float, to: float) -> Color:
 		rand_range(from, to),
 		rand_range(from, to),
 		rand_range(from, to),
-		1.0
+		_original_color.a
 	)

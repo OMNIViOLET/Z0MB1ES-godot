@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://time/time_manager.gd" type="Script" id=1]
 [ext_resource path="res://world/game_world.gd" type="Script" id=2]
 [ext_resource path="res://audio/music_manager.tscn" type="PackedScene" id=3]
 [ext_resource path="res://map/map.tscn" type="PackedScene" id=4]
+[ext_resource path="res://map/map_overlay.tscn" type="PackedScene" id=5]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 2 )
@@ -18,10 +19,17 @@ music_manager_path = NodePath("../MusicManager")
 time_manager_path = NodePath("../TimeManager")
 
 [node name="Map" parent="." instance=ExtResource( 4 )]
+time_manager_path = NodePath("../Managers/TimeManager")
+
+[node name="MapOverlay" parent="." instance=ExtResource( 5 )]
+material = null
+map_path = NodePath("../Map")
+time_manager_path = NodePath("../Managers/TimeManager")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 384, 216 )
+offset = Vector2( 384, 0 )
 current = true
+zoom = Vector2( 2, 2 )
 limit_left = 0
 limit_top = 0
 limit_right = 2048

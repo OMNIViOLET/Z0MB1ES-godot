@@ -34,20 +34,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/imagwzii_text_small.gd"
 }, {
-"base": "Label",
+"base": "IMAGWZIIText",
 "class": "IMAGWZIITextVeryLarge",
 "language": "GDScript",
 "path": "res://ui/imagwzii_text_very_large.gd"
+}, {
+"base": "Node2D",
+"class": "Laser",
+"language": "GDScript",
+"path": "res://map/laser.gd"
 }, {
 "base": "Control",
 "class": "MainMenu",
 "language": "GDScript",
 "path": "res://menu/main_menu.gd"
 }, {
-"base": "Sprite",
+"base": "Node2D",
 "class": "Map",
 "language": "GDScript",
 "path": "res://map/map.gd"
+}, {
+"base": "Node2D",
+"class": "MapOverlay",
+"language": "GDScript",
+"path": "res://map/map_overlay.gd"
 }, {
 "base": "Node",
 "class": "MusicManager",
@@ -86,8 +96,10 @@ _global_script_class_icons={
 "IMAGWZIITextMedium": "",
 "IMAGWZIITextSmall": "",
 "IMAGWZIITextVeryLarge": "",
+"Laser": "",
 "MainMenu": "",
 "Map": "",
+"MapOverlay": "",
 "MusicManager": "",
 "PlayerBox": "",
 "PlayerInfo": "",
@@ -99,7 +111,7 @@ _global_script_class_icons={
 [application]
 
 config/name="I MAED A GAM3 W1TH Z0MBIES 1N IT!!! 1"
-run/main_scene="res://menu/main_menu.tscn"
+run/main_scene="res://world/game_world.tscn"
 boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
 config/icon="res://icon.png"
 
@@ -112,7 +124,10 @@ Players="*res://players/players.gd"
 
 window/size/width=1280
 window/size/height=720
-window/stretch/mode="2d"
+window/size/borderless=true
+window/size/fullscreen=true
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 

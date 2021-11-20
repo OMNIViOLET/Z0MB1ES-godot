@@ -20,6 +20,8 @@ enum Phase {
 	END
 }
 
+const START_PHASE = Phase.METAL
+
 export(NodePath) var music_manager_path
 
 var _phase = Phase.INTRO_THEME
@@ -106,7 +108,6 @@ func get_phase() -> int:
 
 
 func get_track_left() -> float:
-	print("track_left: ", _track_left)
 	return _track_left
 
 
@@ -121,7 +122,7 @@ func can_start_playing() -> bool:
 func start():
 	_beat = -1
 	_phase = Phase.INTRO_THEME
-	_offset = _time_slices[Phase.METAL].start
+	_offset = _time_slices[START_PHASE].start
 	_music_manager.seek(_offset)
 	_start_time = OS.get_ticks_msec()
 	_time = 0.0

@@ -1,47 +1,15 @@
-extends Sprite
+extends Node2D
 class_name Map
 
 const MAX_FRAME = 20.0 * 6.28
 const MAP_SCALE = 1.6
 const MAP_SIZE = Vector2(1280.0, 720.0) * MAP_SCALE
-const DOWN = 1.57
-const RIGHT = 0.0
-const LEFT = 3.14
-const UP = 4.71
-const ZOMBIES = "Z0MB1ES!!1"
-const PANIC = "PAN1C!!!!11"
-const I = "I"
-const MADE = "MAD3"
-const A = "A"
-const GAME = "GAEM"
-const WITH = "W1TH"
-const ZOM = "Z0M"
-const BIES = "B1ES"
-const INIT = "IN 1T!!!1"
-const KARATE = "KARATE"
-const PUNCH = "PUNCH!!1"
-const DIE_IN = "D1E 1N"
-const A_FIRE = "A F1RE!!1"
 const TEH_GAME = "TEH GAEM"
 const IZ_ANGER = "IZ ANGRY!1"
-const MASSIVE = "MASS1VE"
-const OUTRO = "OUTRO!!1"
 
-enum LightMode {
-	NONE,
-	SLOW_WHITE,
-	BLINK_WHITE,
-	RAINBOW_BLINK,
-	BLINK_BLUE,
-	SLOW_RED,
-	SLOW_GOO,
-	BLINK_RED,
-	SOFT_WHITE,
-	SLOW_BLUE,
-	RED_LASERS,
-	BLUE_LASERS,
-	RAINBOW_LASERS,
-	GREEN_LASERS
+enum TextLocation {
+	TOP,
+	BOTTOM
 }
 
 export(NodePath) var time_manager_path
@@ -55,21 +23,19 @@ var NEKO_TEX = load("res://assets/gfx/neko.png")
 var FIRE_TEX = load("res://assets/gfx/fire.png")
 var PSYCHO_NEKO_TEX = load("res://assets/gfx/psychoneko.png")
 
+var goal_brite = 1.0
+
 var _brite = 0.0
-var _goal_brite = 1.0
 var _frame = 0.0
 
-onready var _space_overlay := $SpaceOverlay
-onready var _jungle_overlay1 := $JungleOverlay1
-onready var _jungle_overlay2 := $JungleOverlay2
-onready var _text1 := $Text1
-onready var _text2 := $Text2
+onready var _map_texture := $MapTexture
+onready var _space_overlay := $MapTexture/SpaceOverlay
+onready var _jungle_overlay1 := $MapTexture/JungleOverlay1
+onready var _jungle_overlay2 := $MapTexture/JungleOverlay2
+onready var _text1 = $TextContainer/VBoxContainer/Text1
+onready var _text2 = $TextContainer/VBoxContainer/Text2
 onready var _time_manager := get_node(time_manager_path) as TimeManager
-onready var _thresh := $Thresh
-
-
-func _init():
-	scale = Vector2(MAP_SCALE, MAP_SCALE)
+onready var _thresh := $MapTexture/Thresh
 
 
 func _ready():
@@ -80,6 +46,7 @@ func _ready():
 func _process(delta):
 	_update_frame_time(delta)
 	_update_brite(delta)
+	_reset_text()
 	_setup_map()
 
 
@@ -90,21 +57,19 @@ func _update_frame_time(delta: float):
 
 
 func _update_brite(delta: float):
-	if _brite > _goal_brite:
+	if _brite > goal_brite:
 		_brite -= delta
-		if _brite <= _goal_brite:
-			_brite = _goal_brite
+		if _brite <= goal_brite:
+			_brite = goal_brite
 
-	if _brite < _goal_brite:
+	if _brite < goal_brite:
 		_brite += delta
-		if _brite >= _goal_brite:
-			_brite = _goal_brite
+		if _brite >= goal_brite:
+			_brite = goal_brite
 
 
 func _setup_map():
 	var a = 0.0
-	
-	_goal_brite = 1.0
 	match _time_manager.get_phase():
 		TimeManager.Phase.INTRO_THEME:
 			_setup_intro_theme()
@@ -124,21 +89,24 @@ func _setup_map():
 
 func _setup_intro_theme():
 	if _time_manager.get_track_left() < 8.0:
-		_draw_map_trans(GRASS_TEX, SKA_TEX)
+		var t = ((_time_manager.get_track_left() / 8.0) + 0.2)
+		_draw_map_trans(GRASS_TEX, SKA_TEX, 1.0 - t)
 	else:
 		_draw_map(GRASS_TEX)
 
 
 func _setup_ska():
 	if _time_manager.get_track_left() < 8.0:
-		_draw_map_trans(SKA_TEX, SPACE_TEX)
+		var t = ((_time_manager.get_track_left() / 8.0) + 0.2)
+		_draw_map_trans(SKA_TEX, SPACE_TEX, 1.0 - t)
 	else:
 		_draw_map(SKA_TEX)
 
 
 func _setup_space():
 	if _time_manager.get_track_left() < 8.0:
-		_draw_map_trans(SPACE_TEX, CONCRETE_TEX)
+		var t = ((_time_manager.get_track_left() / 8.0) + 0.2)
+		_draw_map_trans(SPACE_TEX, CONCRETE_TEX, 1.0 - t)
 	else:
 		_draw_map(SPACE_TEX)
 		_space_overlay.visible = true
@@ -149,7 +117,8 @@ func _setup_space():
 func _setup_rock():
 	_space_overlay.visible = false
 	if _time_manager.get_track_left() < 8.0:
-		_draw_map_trans(CONCRETE_TEX, GRID_TEX)
+		var t = ((_time_manager.get_track_left() / 8.0) + 0.2)
+		_draw_map_trans(CONCRETE_TEX, GRID_TEX, 1.0 - t)
 	else:
 		_draw_map(CONCRETE_TEX)
 
@@ -180,19 +149,13 @@ func _setup_metal():
 	var beat = _time_manager.get_beat()
 	var octobeat = _time_manager.get_octobeat()
 
-	_text1.visible = false
-	_text2.visible = false
 	if beat < 32 or (beat >= 64 and beat < 96):
 		if (beat / 2) % 2 == 0:
 			if octobeat % 2 == 0:
 				_draw_map(NEKO_TEX)
 			else:
-				_text1.text = TEH_GAME
-				_text2.text = IZ_ANGER
-				_text1.self_modulate = Color.white
-				_text2.self_modulate = Color.white
-				_text1.visible = true
-				_text2.visible = true
+				_draw_text(TEH_GAME, TextLocation.TOP, Color.white)
+				_draw_text(IZ_ANGER, TextLocation.BOTTOM, Color.white)
 		else:
 			_draw_map(FIRE_TEX)
 	else:
@@ -204,7 +167,8 @@ func _setup_metal():
 
 func _setup_outtro_theme():
 	if _time_manager.get_track_time() < 2.0:
-		_draw_map_trans(CONCRETE_TEX, GRASS_TEX)
+		var t = 1.0 - ((_time_manager.get_track_left() / 2.0) + 0.2)
+		_draw_map_trans(CONCRETE_TEX, GRASS_TEX, 1.0 - t)
 	else:
 		_draw_map(GRASS_TEX)
 
@@ -220,19 +184,36 @@ func get_track_alpha() -> float:
 
 func _draw_map(texture: Texture):
 	_thresh.visible = false
-	self.texture = texture
-	self_modulate = Color(_brite, _brite, _brite, 1.0)
+	_map_texture.texture = texture
+	_map_texture.self_modulate = Color(_brite, _brite, _brite, 1.0)
 
 
-func _draw_map_trans(texture: Texture, target: Texture):
-	var t = 1.0 - ((_time_manager.get_track_left() / 8.0) + 0.2)
+func _draw_map_trans(texture: Texture, target: Texture, t: float):
 	var r = (1.0 - t) * _brite
 
-	texture = texture
-	self_modulate = Color(r, r, r, 1.0)
+	_map_texture.texture = texture
+	_map_texture.self_modulate = Color(r, r, r, 1.0)
 
 	_thresh.texture = target
 	var shader_material = _thresh.material as ShaderMaterial
 	shader_material.set_shader_param("v", 1.0 - t)
 	shader_material.set_shader_param("b", _brite)
 	_thresh.visible = true
+
+
+func _draw_text(text: String, location: int, color: Color = Color.white, flashing: bool = false):
+	var label: IMAGWZIIText = null
+	match location:
+		TextLocation.TOP:
+			label = _text1
+		TextLocation.BOTTOM:
+			label = _text2
+
+	label.text = text
+	label.modulate = color
+	label.flashing = flashing
+
+
+func _reset_text():
+	_text1.text = ""
+	_text2.text = ""
