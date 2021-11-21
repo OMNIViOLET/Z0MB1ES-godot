@@ -171,90 +171,6 @@ visible = false
 [node name="Light52" parent="Lights" instance=ExtResource( 2 )]
 visible = false
 
-[node name="Light53" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light54" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light55" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light56" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light57" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light58" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light59" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light60" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light61" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light62" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light63" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light64" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light65" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light66" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light67" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light68" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light69" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light70" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light71" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light72" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light73" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light74" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light75" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light76" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light77" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light78" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light79" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
-[node name="Light80" parent="Lights" instance=ExtResource( 2 )]
-visible = false
-
 [node name="Lasers" type="Node2D" parent="."]
 
 [node name="Laser1" parent="Lasers" instance=ExtResource( 3 )]
@@ -311,60 +227,6 @@ visible = false
 [node name="Laser18" parent="Lasers" instance=ExtResource( 3 )]
 visible = false
 
-[node name="Laser19" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser20" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser21" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser22" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser23" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser24" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser25" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser26" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser27" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser28" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser29" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser30" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser31" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser32" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser33" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser34" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser35" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Laser36" parent="Lasers" instance=ExtResource( 3 )]
-visible = false
-
 [node name="TextContainer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -393,6 +255,7 @@ margin_right = 2048.0
 margin_bottom = 250.0
 custom_fonts/font = ExtResource( 5 )
 align = 1
+flash_range_min = 0.5
 
 [node name="Text2" parent="TextContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_top = 280.0
@@ -400,6 +263,7 @@ margin_right = 2048.0
 margin_bottom = 530.0
 custom_fonts/font = ExtResource( 5 )
 align = 1
+flash_range_min = 0.5
 
 [node name="CenterText" parent="TextContainer" instance=ExtResource( 4 )]
 anchor_top = 0.5
@@ -411,3 +275,4 @@ margin_right = -25.0
 margin_bottom = 125.0
 custom_fonts/font = ExtResource( 5 )
 align = 1
+flash_range_min = 0.5

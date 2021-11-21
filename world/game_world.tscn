@@ -21,16 +21,18 @@ time_manager_path = NodePath("../TimeManager")
 [node name="Map" parent="." instance=ExtResource( 4 )]
 time_manager_path = NodePath("../Managers/TimeManager")
 
+[node name="Heroes" type="Node2D" parent="."]
+
 [node name="MapOverlay" parent="." instance=ExtResource( 5 )]
 material = null
 map_path = NodePath("../Map")
 time_manager_path = NodePath("../Managers/TimeManager")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 384, 0 )
 current = true
-zoom = Vector2( 2, 2 )
 limit_left = 0
 limit_top = 0
 limit_right = 2048
 limit_bottom = 1152
+smoothing_enabled = true
+editor_draw_drag_margin = true

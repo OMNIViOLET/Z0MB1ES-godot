@@ -57,6 +57,10 @@ func set_slot_device(slot: int, device_id: int, device_type: int):
 	_on_slot_updated(slot)
 
 
+func get_slot_device(slot: int) -> int:
+	return players[slot].device_id
+
+
 func get_device_slot(device_id: int, device_type: int) -> int:
 	for i in MAX_PLAYERS:
 		if players[i].device_id == device_id and players[i].device_type == device_type:

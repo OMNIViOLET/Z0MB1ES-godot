@@ -1,9 +1,8 @@
 extends Label
 class_name IMAGWZIIText
 
-const FLASH_RANGE_MIN = 0.4
-const FLASH_RANGE_MAX = 1.0
-
+export(float, 0.0, 1.0) var flash_range_min = 0.4
+export(float, 0.0, 1.0) var flash_range_max = 1.0
 export(bool) var flashing = false setget _set_flashing, _get_flashing
 
 var _original_color = Color.white
@@ -15,7 +14,7 @@ func _ready():
 
 func _process(_delta):
 	if flashing:
-		modulate = _get_random_color(FLASH_RANGE_MIN, FLASH_RANGE_MAX)
+		modulate = _get_random_color(flash_range_min, flash_range_max)
 
 
 func _set_flashing(value: bool):
