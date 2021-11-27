@@ -1,8 +1,20 @@
 extends Control
 class_name MainMenu
 
+const GO_TIME = 1.0
+
+const JOYPAD_CANCEL = "(B) cancel"
+const JOYPAD_OK = "(A) ok"
+const JOYPAD_SETTINGS = "(X) settings"
+const JOYPAD_SCORES = "(Y) scores"
+
+const KEYBOARD_CANCEL = "(esc) cancel"
+const KEYBOARD_OK = "(enter) ok"
+const KEYBOARD_SETTINGS = "(F2) settings"
+const KEYBOARD_SCORES = "(F1) scores"
 
 var _device_grace = {}
+var _go_timer = 0.0
 var _primary_device_type = PlayerInfo.DeviceType.JOYPAD
 
 onready var _subtitle := $TitleContainer/Subtitle
@@ -24,17 +36,24 @@ func _process(delta):
 	
 	match _primary_device_type:
 		PlayerInfo.DeviceType.JOYPAD:
-			_ok.text = "(A) ok"
-			_cancel.text = "(B) cancel"
-			_scores.text = "(Y) scores"
-			_settings.text = "(X) settings"
+			_ok.text = JOYPAD_OK
+			_cancel.text = JOYPAD_CANCEL
+			_scores.text = JOYPAD_SCORES
+			_settings.text = JOYPAD_SETTINGS
 		PlayerInfo.DeviceType.KEYBOARD:
-			_ok.text = "(enter) ok"
-			_cancel.text = "(esc) cancel"
-			_scores.text = "(F1) scores"
-			_settings.text = "(F2) settings"
+			_ok.text = KEYBOARD_OK
+			_cancel.text = KEYBOARD_CANCEL
+			_scores.text = KEYBOARD_SCORES
+			_settings.text = KEYBOARD_SETTINGS
 	
 	_device_grace.clear()
+	
+	if Players.all_slots_ready():
+		_go_timer += delta
+		if _go_timer >= GO_TIME:
+			get_tree().change_scene("res://world/game_world.tscn")
+	else:
+		_go_timer = 0.0
 
 
 func _input(event):

@@ -7,6 +7,7 @@ const DEVICE_NOT_ASSIGNED = -1
 signal slot_updated(slot)
 signal slots_updated()
 
+var active_players = 0
 var players = [
 	PlayerInfo.new(),
 	PlayerInfo.new(),
@@ -20,6 +21,7 @@ func _init():
 
 
 func reset_players():
+	active_players = 0
 	players[0].player_name = "Player 1"
 	players[0].color = Color(0.5, 0.5, 1.0)
 	players[1].player_name = "Player 2"
@@ -61,6 +63,10 @@ func get_slot_device(slot: int) -> int:
 	return players[slot].device_id
 
 
+func get_slot_device_type(slot: int) -> int:
+	return players[slot].device_type
+
+
 func get_device_slot(device_id: int, device_type: int) -> int:
 	for i in MAX_PLAYERS:
 		if players[i].device_id == device_id and players[i].device_type == device_type:
@@ -69,11 +75,15 @@ func get_device_slot(device_id: int, device_type: int) -> int:
 
 
 func ready_slot(slot: int):
+	if get_slot_state(slot) == PlayerInfo.PlayerState.OUT:
+		active_players += 1
 	players[slot].ready_player()
 	_on_slot_updated(slot)
 
 
 func unready_slot(slot: int):
+	if get_player_info(slot).player_state == PlayerInfo.PlayerState.IN:
+		active_players -= 1
 	players[slot].unready_player()
 	_on_slot_updated(slot)
 
@@ -93,7 +103,7 @@ func all_slots_ready() -> bool:
 	var any_ready = false
 	var all_ready = true
 	
-	for i in MAX_PLAYERS:
+	for i in active_players:
 		var ready = get_slot_state(i) == PlayerInfo.PlayerState.READY
 		if ready:
 			any_ready = true

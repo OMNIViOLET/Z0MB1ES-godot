@@ -131,14 +131,23 @@ func _handle_input():
 	var device_id = Players.get_slot_device(player)
 	if device_id == Players.DEVICE_NOT_ASSIGNED:
 		return
-	
-	_traj = Vector2(Input.get_joy_axis(device_id, JOY_AXIS_0), Input.get_joy_axis(device_id, JOY_AXIS_1))
-	if _traj.length() < 0.1:
-		_traj = Vector2.ZERO
-	_shoot = Vector2(Input.get_joy_axis(device_id, JOY_AXIS_2), Input.get_joy_axis(device_id, JOY_AXIS_3))
-	if _shoot.length() < 0.1:
-		_shoot = Vector2.ZERO
-	
+		
+	var device_type = Players.get_slot_device_type(player)
+	match device_type:
+		PlayerInfo.DeviceType.JOYPAD:
+			_traj = Vector2(Input.get_joy_axis(device_id, JOY_AXIS_0), Input.get_joy_axis(device_id, JOY_AXIS_1))
+			if _traj.length() < 0.1:
+				_traj = Vector2.ZERO
+			_shoot = Vector2(Input.get_joy_axis(device_id, JOY_AXIS_2), Input.get_joy_axis(device_id, JOY_AXIS_3))
+			if _shoot.length() < 0.1:
+				_shoot = Vector2.ZERO
+		PlayerInfo.DeviceType.KEYBOARD:
+			_traj = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+			if Input.is_action_pressed("shoot"):
+				_shoot = (get_global_mouse_position() - global_position).normalized()
+			else:
+				_shoot = Vector2.ZERO
+
 
 func _shoot_and_move(delta):
 	_leg1.traj = _traj

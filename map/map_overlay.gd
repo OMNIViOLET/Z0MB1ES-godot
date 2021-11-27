@@ -89,8 +89,6 @@ func _process(delta):
 	
 	_max_lights = max(_max_lights, _light_index)
 	_max_lasers = max(_max_lasers, _laser_index)
-	print("max lights: ", _max_lights)
-	print("max lasers: ", _max_lasers)
 
 
 func _update_frame_time(delta: float):
