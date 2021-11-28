@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://weapons/weapon_machine_gun.gd" type="Script" id=1]
+[ext_resource path="res://assets/sfx/fx/shotgun.wav" type="AudioStream" id=2]
+
+[resource]
+script = ExtResource( 1 )
+weapon_type = 1
+sound_effect = ExtResource( 2 )
+shoot_frame_time = 0.04

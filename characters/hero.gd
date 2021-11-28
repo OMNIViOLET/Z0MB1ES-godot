@@ -5,16 +5,6 @@ const BOUNDRY_BUFFER = 100.0
 const SPEED_NORMAL = 140.0
 const SPEED_FAST = 240.0
 
-enum Weapon {
-	RIFLE,
-	MACHINE_GUN,
-	ROCKETS,
-	FLAMETHROWER,
-	SHOTTY,
-	BEAM,
-	NEUTRON
-}
-
 var HEROES = [
 	load("res://assets/gfx/hero1.tres"),
 	load("res://assets/gfx/hero2.tres"),
@@ -22,10 +12,21 @@ var HEROES = [
 	load("res://assets/gfx/hero4.tres")
 ]
 
+var WEAPONS = {
+	Weapon.WeaponType.BEAM: load("res://weapons/weapon_beam.tres"),
+	Weapon.WeaponType.FLAMETHROWER: load("res://weapons/weapon_flamethrower.tres"),
+	Weapon.WeaponType.MACHINE_GUN: load("res://weapons/weapon_machine_gun.tres"),
+	Weapon.WeaponType.NEUTRON: load("res://weapons/weapon_neutron.tres"),
+	Weapon.WeaponType.RIFLE: load("res://weapons/weapon_rifle.tres"),
+	Weapon.WeaponType.ROCKETS: load("res://weapons/weapon_rockets.tres"),
+	Weapon.WeaponType.SHOTTY: load("res://weapons/weapon_shotty.tres")
+}
+
 var exists = false
 var lives = 0
 var player = 0
 var player_tag = ""
+var world = null
 var score = 0
 
 var _angle = 0.0
@@ -35,7 +36,7 @@ var _shoot_frame = 0.0
 var _spawn_frame = 0.0
 var _speed_frame = 0.0
 var _traj = Vector2.ZERO
-var _weapon = Weapon.RIFLE
+var _weapon = Weapon.WeaponType.RIFLE
 var _ammo = 0
 
 
@@ -43,6 +44,7 @@ onready var _body := $Body
 onready var _leg1 := $Leg1
 onready var _leg2 := $Leg2
 onready var _collider := $Collider
+onready var _sfx := $SFX
 
 
 func _ready():
@@ -92,7 +94,7 @@ func spawn(loc: Vector2):
 	lives = 5
 	position = loc
 	exists = true
-	set_weapon(Weapon.RIFLE, 0)
+	set_weapon(Weapon.WeaponType.RIFLE, 0)
 	score = 0
 
 
@@ -162,7 +164,22 @@ func _shoot_and_move(delta):
 	
 	var goal_angle = _body.rotation
 	if _shoot.length() > 0.1:
-		pass
+		goal_angle = _shoot.angle() + PI
+		if _shoot_frame <= 0.0 and _shoot.length() > 0.9:
+			_angle = goal_angle
+			var t_shoot = _shoot.normalized()
+			
+			var weapon_def = WEAPONS[_weapon] as Weapon
+			_shoot_frame = weapon_def.shoot_frame_time
+			_sfx.stream = weapon_def.sound_effect
+			_sfx.play()
+			
+			weapon_def.fire(world, player, position, _angle)
+			
+			if _weapon != Weapon.WeaponType.RIFLE:
+				_ammo -= 1
+				if _ammo <= 0:
+					_weapon = Weapon.WeaponType.RIFLE
 	elif _traj.length() > 0.0:
 		goal_angle = _traj.angle() + PI
 		goal_angle += sin(_leg1.frame_time) * 0.1

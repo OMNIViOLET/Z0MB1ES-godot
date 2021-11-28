@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://weapons/projectiles/projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://weapons/projectiles/rocket.gd" type="Script" id=2]
+[ext_resource path="res://assets/gfx/rocket.tres" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.0
+height = 24.0
+
+[node name="Rocket" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+lifetime = 1.0
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+modulate = Color( 1, 1, 1, 0.501961 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 3 )
+offset = Vector2( -64, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2( -38, 0 )
+rotation = -1.5708
+shape = SubResource( 1 )
