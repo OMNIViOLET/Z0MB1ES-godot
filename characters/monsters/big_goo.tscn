@@ -26,6 +26,7 @@ speed = 0.8
 
 [node name="Body" type="Sprite" parent="." index="2"]
 scale = Vector2( 0.3, 0.3 )
+z_index = 2
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]

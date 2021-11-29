@@ -18,26 +18,30 @@ speed = 90.0
 [node name="Shadow" type="Sprite" parent="." index="0"]
 modulate = Color( 0, 0, 0, 0.5 )
 scale = Vector2( 0.4, 0.4 )
+z_index = 1
 texture = ExtResource( 6 )
 
 [node name="Legs1" type="Sprite" parent="." index="1"]
-scale = Vector2( 0.42, 0.42 )
+scale = Vector2( 0.3, 0.3 )
+z_index = 2
 texture = ExtResource( 5 )
 offset = Vector2( 0, 10 )
 script = ExtResource( 3 )
 speed = 1.2
 
 [node name="Legs2" type="Sprite" parent="." index="2"]
-scale = Vector2( 0.42, 0.42 )
+scale = Vector2( 0.3, 0.3 )
+z_index = 2
 texture = ExtResource( 5 )
 offset = Vector2( 0, 10 )
 script = ExtResource( 3 )
+leg_index = 1
 speed = 1.2
 
 [node name="Body" type="Sprite" parent="." index="3"]
 scale = Vector2( 0.3, 0.3 )
+z_index = 3
 texture = ExtResource( 4 )
-offset = Vector2( -46, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 shape = SubResource( 1 )

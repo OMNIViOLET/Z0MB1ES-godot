@@ -17,17 +17,20 @@ monster_type = 10
 [node name="Body1" type="Sprite" parent="." index="0"]
 material = SubResource( 2 )
 scale = Vector2( 0.3, 0.3 )
+z_index = 5
 texture = ExtResource( 3 )
 
 [node name="Body2" type="Sprite" parent="." index="1"]
 material = SubResource( 2 )
 scale = Vector2( 0.3, 0.3 )
+z_index = 5
 texture = ExtResource( 3 )
 
 [node name="Body3" type="Sprite" parent="." index="2"]
 modulate = Color( 1, 1, 1, 0.501961 )
 material = SubResource( 2 )
 scale = Vector2( 0.3, 0.3 )
+z_index = 5
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]

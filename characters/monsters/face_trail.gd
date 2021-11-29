@@ -2,6 +2,10 @@ extends Monster
 class_name FaceTrail
 
 
+func _ready():
+	_body.rotation = _iangle * 1.57
+
+
 func _process(delta):
 	modulate = Color(1.0, int(spawn_frame * 8.0) % 2, int(spawn_frame * 8.0) % 2, 1.0) if spawn_frame > 0.0 else Color.red
 
@@ -10,7 +14,6 @@ func spawn(loc: Vector2, midspawn: bool = false):
 	.spawn(loc, midspawn)
 	_frame_time = 0.1
 	_iangle = Rand.rint(0, 4)
-	_body.rotation = _iangle * 1.57
 	hp = 5.0
 
 
