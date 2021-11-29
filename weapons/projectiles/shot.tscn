@@ -3,9 +3,8 @@
 [ext_resource path="res://weapons/projectiles/projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/gfx/shot.tres" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 3.0
-height = 26.0
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
 
 [node name="Shot" instance=ExtResource( 1 )]
 lifetime = 0.3

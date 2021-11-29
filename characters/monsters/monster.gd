@@ -49,10 +49,12 @@ func _process(delta):
 		
 	_age += delta
 
-	_ai(delta)
-
 	if _grace > 0.0:
 		_grace -= delta
+
+
+func _physics_process(delta):
+	_ai(delta)
 
 
 func _ai(delta: float):
@@ -116,3 +118,88 @@ func spawn(loc: Vector2, midspawn: bool = false):
 		_body.scale = Vector2.ZERO
 	_age = 0.0
 	_grace = 2.0
+
+
+func _on_monster_hit(projectile: Projectile):
+	pass
+
+
+func _on_Monster_area_entered(area):
+	if not exists:
+		return
+	
+	var projectile = area as Projectile
+	if projectile and projectile.exists and spawn_frame <= 0.0:
+		_on_monster_hit(projectile)
+		
+		if projectile is Rocket:
+			projectile.explode()
+		
+		if projectile is Neutron:
+			projectile.pew()
+		elif projectile is LaserBeam:
+			pass
+		elif projectile is Flame:
+			if Rand.coin_toss(0.25):
+				projectile.exists = false
+		else:
+			projectile.exists = false
+		
+		if not projectile.exists and not projectile.is_queued_for_deletion():
+			projectile.queue_free()
+
+
+func _make_blood_chunks(loc: Vector2, traj: Vector2):
+	for i in range(0, 10):
+		world.add_particle(
+			ParticleCatalog.ParticleType.BLOOD,
+			loc,
+			Rand.vec2(-150.0, 150.0, -150.0, 150.0) + traj * rand_range(0.0, 0.3),
+			0,
+			rand_range(0.2, 0.5),
+			0
+		)
+		world.add_particle(
+			ParticleCatalog.ParticleType.BLOOD,
+			loc,
+			Rand.vec2(-150.0, 150.0, -150.0, 150.0),
+			0,
+			rand_range(0.2, 0.5),
+			0
+		)
+
+
+func _make_blood_splode(loc: Vector2, reps: int, size: float, traj: float):
+	for i in range(0, reps):
+		world.add_particle(
+			ParticleCatalog.ParticleType.BLOOD,
+			loc,
+			Rand.vec2(-traj, traj, -traj, traj),
+			0,
+			size,
+			0
+		)
+
+
+func _make_pixel_splode(loc: Vector2, reps: int, size: float, traj: float):
+	for i in range(0, reps):
+		world.add_particle(
+			ParticleCatalog.ParticleType.PIXEL,
+			loc,
+			Rand.vec2(-traj, traj, -traj, traj),
+			0,
+			size,
+			0
+		)
+
+
+func _make_goo(loc: Vector2, reps: int, size: float, traj: float):
+	for i in range(0, reps):
+		world.add_particle(
+			ParticleCatalog.ParticleType.GOO,
+			loc,
+			Rand.vec2(-traj, traj, -traj, traj),
+			0,
+			size,
+			0
+		)

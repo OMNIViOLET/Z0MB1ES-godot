@@ -41,9 +41,11 @@ time_manager_path = NodePath("../Managers/TimeManager")
 
 [node name="AdditiveParticleManager" parent="." instance=ExtResource( 6 )]
 material = SubResource( 1 )
+z_index = 6
 
 [node name="MapOverlay" parent="." instance=ExtResource( 5 )]
 material = null
+z_index = 10
 map_path = NodePath("../Map")
 time_manager_path = NodePath("../Managers/TimeManager")
 

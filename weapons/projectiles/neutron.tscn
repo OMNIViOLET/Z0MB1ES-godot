@@ -10,9 +10,8 @@ blend_mode = 1
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 3.0
-height = 26.0
+[sub_resource type="CircleShape2D" id=4]
+radius = 16.0
 
 [node name="Neutron" instance=ExtResource( 1 )]
 material = SubResource( 3 )
@@ -46,6 +45,5 @@ region_enabled = true
 region_rect = Rect2( 0, 320, 128, 128 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
-visible = false
 rotation = -1.5708
-shape = SubResource( 1 )
+shape = SubResource( 4 )

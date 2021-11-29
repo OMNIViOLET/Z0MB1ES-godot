@@ -11,20 +11,20 @@ var particles = []
 
 func _init():
 	for i in PARTICLE_COUNT:
-		particles.append(PARTICLE.instance())
+		var particle = PARTICLE.instance()
+		particle.visible = false
+		particles.append(particle)
+		add_child(particle)
 
 
 func _process(delta):
 	for i in particles.size():
 		var particle = particles[i] as Particle
 		if not particle.exists:
+			particle.set_alpha(false)
 			particle.visible = false
-			if is_a_parent_of(particle):
-				remove_child(particle)
 			continue
-		if not is_a_parent_of(particle):
-			particle.visible = true
-			add_child(particle)
+		particle.visible = true
 		particle.region_enabled = false
 		var def = catalog.get_particle_def(particle.particle_type)
 		def.process(delta, particle)
@@ -36,7 +36,7 @@ func add_particle(particle_type: int, loc: Vector2, traj: Vector2, player: int, 
 		var particle = particles[i] as Particle
 		if particle.exists:
 			continue
-		particle.alpha = false
+		particle.set_alpha(false)
 		var def = catalog.get_particle_def(particle_type)
 		def.init(particle, loc, traj, player, size, flags)
 		particle.particle_type = particle_type

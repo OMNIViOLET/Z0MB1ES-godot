@@ -38,3 +38,20 @@ func _ai(delta: float):
 				if _iangle == 3:
 					_iangle = 1
 			_body.rotation = _iangle * 1.57
+
+
+func _on_monster_hit(projectile: Projectile):
+	for i in range(0, 10):
+		world.add_particle(
+			ParticleCatalog.ParticleType.FACE_DIE,
+			position,
+			Rand.vec2(-200.0, 200.0, -200.0, 200.0),
+			0,
+			rand_range(0.3, 0.5),
+			0
+		)
+	exists = false
+	Players.add_points(projectile.player, 150)
+	if Rand.coin_toss(0.01):
+		world.make_goodie(position)
+	._on_monster_hit(projectile)

@@ -46,3 +46,45 @@ func _ai(delta: float):
 				if _iangle == 3:
 					_iangle = 1
 			_body.rotation = _iangle * 1.57
+
+
+func _on_monster_hit(projectile: Projectile):
+	hp -= 1
+	if hp <= 0:
+		exists = false
+		for i in range(0, 4):
+			world.add_particle(
+				ParticleCatalog.ParticleType.FACE_DIE,
+				position,
+				Rand.vec2(-500.0, 500.0, -500.0, 500.0),
+				0,
+				0.0,
+				0
+			)
+		var particles = get_tree().get_nodes_in_group("particle")
+		for particle in particles:
+			if particle.exists and particle.particle_type == ParticleCatalog.ParticleType.FACE_TRAIL and particle.player == idx:
+				particle.exists = false
+				for i in range(0, 3):
+					world.add_particle(
+						ParticleCatalog.ParticleType.FACE_DIE,
+						particle.position,
+						Rand.vec2(-200.0, 200.0, -200.0, 200.0),
+						0,
+						0.0,
+						0
+					)
+		if Rand.coin_toss(0.4):
+			world.make_goodie(position)
+		Players.add_points(projectile.player, 600)
+	else:
+		for i in range(0, 4):
+			world.add_particle(
+				ParticleCatalog.ParticleType.FACE_DIE,
+				position,
+				Rand.vec2(-500.0, 500.0, -500.0, 500.0),
+				0,
+				0.0,
+				0
+			)
+	._on_monster_hit(projectile)

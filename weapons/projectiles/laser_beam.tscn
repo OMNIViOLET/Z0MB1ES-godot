@@ -7,8 +7,9 @@
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 16.0
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 8.0
+height = 114.0
 
 [node name="LaserBeam" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -18,9 +19,11 @@ lifetime = 0.5
 modulate = Color( 0.7, 0.7, 1, 1 )
 material = SubResource( 2 )
 scale = Vector2( 1, 0.5 )
+z_index = 6
 texture = ExtResource( 3 )
 offset = Vector2( -64, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2( -64, 0 )
 rotation = -1.5708
 shape = SubResource( 3 )

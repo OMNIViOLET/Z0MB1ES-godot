@@ -33,6 +33,18 @@ func reset_players():
 	_on_slots_updated()
 
 
+func add_points(player: int, points: int):
+	get_player_info(player).points += points
+
+
+func get_points(player: int) -> int:
+	return get_player_info(player).points
+
+
+func set_points(player: int, points: int):
+	get_player_info(player).points = points
+
+
 func get_player_info(slot: int) -> PlayerInfo:
 	return players[slot]
 

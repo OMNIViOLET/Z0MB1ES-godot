@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://characters/monsters/blartard.gd"
 }, {
+"base": "ParticleDef",
+"class": "Blood",
+"language": "GDScript",
+"path": "res://particles/blood.gd"
+}, {
 "base": "Monster",
 "class": "Bomber",
 "language": "GDScript",
@@ -38,6 +43,11 @@ _global_script_classes=[ {
 "class": "Explode",
 "language": "GDScript",
 "path": "res://particles/explode.gd"
+}, {
+"base": "ParticleDef",
+"class": "FaceDie",
+"language": "GDScript",
+"path": "res://particles/face_die.gd"
 }, {
 "base": "Monster",
 "class": "FaceTrail",
@@ -64,10 +74,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://world/game_world.gd"
 }, {
+"base": "ParticleDef",
+"class": "Geobit",
+"language": "GDScript",
+"path": "res://particles/geobit.gd"
+}, {
 "base": "Monster",
 "class": "Geode",
 "language": "GDScript",
 "path": "res://characters/monsters/geode.gd"
+}, {
+"base": "ParticleDef",
+"class": "Goo",
+"language": "GDScript",
+"path": "res://particles/goo.gd"
 }, {
 "base": "Area2D",
 "class": "Hero",
@@ -159,6 +179,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://particles/muzzle_flash.gd"
 }, {
+"base": "ParticleDef",
+"class": "Neuchunk",
+"language": "GDScript",
+"path": "res://particles/neuchunk.gd"
+}, {
 "base": "Projectile",
 "class": "Neutron",
 "language": "GDScript",
@@ -183,6 +208,11 @@ _global_script_classes=[ {
 "class": "ParticleManager",
 "language": "GDScript",
 "path": "res://particles/particle_manager.gd"
+}, {
+"base": "ParticleDef",
+"class": "Pixel",
+"language": "GDScript",
+"path": "res://particles/pixel.gd"
 }, {
 "base": "VBoxContainer",
 "class": "PlayerBox",
@@ -274,14 +304,18 @@ _global_script_class_icons={
 "BigAsteroid": "",
 "BigGoo": "",
 "Blartard": "",
+"Blood": "",
 "Bomber": "",
 "Explode": "",
+"FaceDie": "",
 "FaceTrail": "",
 "FaceTrailParticle": "",
 "Fatty": "",
 "Flame": "",
 "GameWorld": "",
+"Geobit": "",
 "Geode": "",
+"Goo": "",
 "Hero": "",
 "IMAGWZIIText": "",
 "IMAGWZIITextLarge": "",
@@ -300,11 +334,13 @@ _global_script_class_icons={
 "Monster": "",
 "MusicManager": "",
 "MuzzleFlash": "",
+"Neuchunk": "",
 "Neutron": "",
 "Particle": "",
 "ParticleCatalog": "",
 "ParticleDef": "",
 "ParticleManager": "",
+"Pixel": "",
 "PlayerBox": "",
 "PlayerInfo": "",
 "Projectile": "",
@@ -433,6 +469,12 @@ shoot={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="hero"
+2d_physics/layer_2="projectile"
+2d_physics/layer_3="monster"
 
 [physics]
 

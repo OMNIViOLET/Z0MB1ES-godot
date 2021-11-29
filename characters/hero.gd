@@ -80,6 +80,9 @@ func _process(delta):
 		return
 	
 	_handle_input()
+
+
+func _physics_process(delta):
 	_shoot_and_move(delta)
 
 
@@ -110,7 +113,7 @@ func spawn(loc: Vector2):
 	lives = 5
 	position = loc
 	exists = true
-	set_weapon(Weapon.WeaponType.RIFLE, 0)
+	set_weapon(Weapon.WeaponType.FLAMETHROWER, 9000)
 	score = 0
 
 

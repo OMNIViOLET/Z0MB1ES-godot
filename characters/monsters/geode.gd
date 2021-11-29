@@ -75,3 +75,20 @@ func _clamp_rotation(body: Sprite):
 		body.rotation -= (PI * 2.0)
 	while body.rotation < 0.0:
 		body.rotation += (PI * 2.0)
+
+
+func _on_monster_hit(projectile: Projectile):
+	for i in range(0, 10):
+		world.add_particle(
+			ParticleCatalog.ParticleType.GEOBIT,
+			position,
+			Rand.vec2(-200.0, 200.0, -200.0, 200.0),
+			0,
+			rand_range(0.1, 0.3),
+			0
+		)
+	exists = false
+	Players.add_points(projectile.player, 120)
+	if Rand.coin_toss(0.2):
+		world.make_goodie(position)
+	._on_monster_hit(projectile)

@@ -23,19 +23,29 @@ var MONSTERS = {
 }
 
 var monsters = []
+var num_monsters = 0
+var next_idx = 0
 
 onready var _monster_container := get_node(monster_container_path)
 onready var _world := get_node(world_path) as GameWorld
 
 
 func _process(delta):
-	for i in monsters.size():
-		var monster = monsters[i] as Monster
+	num_monsters = 0
+	var removals = []
+	for i in range(0, monsters.size()):
+		var monster = monsters[i]
+		if not is_instance_valid(monster) or monster.is_queued_for_deletion():
+			monsters[i] = null
+			continue
+		if monster and monster.exists:
+			num_monsters += 1
 		if monster and (not monster.exists or monster.hp < 0):
+			removals.append(monster)
 			monster.queue_free()
-			monsters.remove(i)
-	#print("monsters array: ", monsters.size())
-	#print("actual monsters: ", _monster_container.get_child_count())
+
+	for monster in removals:
+		monsters.erase(monster)
 
 
 func do_click(phase: int, beats: int):
@@ -240,10 +250,18 @@ func do_click(phase: int, beats: int):
 					_on_the_end_is_nigh()
 
 
+func make_goodie(loc: Vector2):
+	#TODO: spawn power up
+	pass
+
+
 func _clear_monsters():
 	for i in monsters.size():
-		var monster = monsters[i] as Monster
-		monster.queue_free()
+		var monster = monsters[i]
+		if not is_instance_valid(monster) or monster.is_queued_for_deletion():
+			continue
+		if monster:
+			monster.queue_free()
 	monsters.clear()
 
 
@@ -252,11 +270,6 @@ func _make_goodies(count: int):
 		if Rand.coin_toss(0.3):
 			#TODO: spawn power up
 			pass
-
-
-func _make_goodie(loc: Vector2):
-	#TODO: spawn power up
-	pass
 
 
 func _get_adjusted_count(count: int) -> int:
@@ -300,27 +313,33 @@ func _pop(monster_type: int, count: int):
 
 
 func _make_monster(loc: Vector2, monster_type: int, midspawn: bool = false):
-	var count = min(monsters.size(), MAX_MONSTERS)
+	var count = min(num_monsters, MAX_MONSTERS)
 	
 	var monster = MONSTERS[monster_type].instance()
+	monster.idx = next_idx
+	next_idx += 1
 	monster.world = _world
 	monster.spawn(loc, midspawn)
-	_monster_container.add_child(monster)
+	_monster_container.call_deferred("add_child", monster)
 
 	if count < MAX_MONSTERS:
 		monsters.append(monster)
 	else:
 		var oldest = 0
 		var oldval = 0.0
-		for i in count:
-			var m = monsters[i] as Monster
+		for i in monsters.size():
+			var m = monsters[i]
+			if not is_instance_valid(m) or m.is_queued_for_deletion():
+				monsters[i] = null
+				continue
 			if m and (not m.exists or m.hp < 0.0):
 				m.queue_free()
 				monsters[i] = monster
 				return
-			elif m and m._age > oldval:
+			elif not m or m._age > oldval:
 				oldest = i
-				oldval = m._age
+				if m:
+					oldval = m._age
 		var m = monsters[oldest] as Monster
 		if m:
 			m.queue_free()

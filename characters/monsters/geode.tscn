@@ -11,6 +11,7 @@ blend_mode = 1
 radius = 16.0
 
 [node name="Geode" instance=ExtResource( 1 )]
+z_index = 6
 script = ExtResource( 2 )
 monster_type = 10
 

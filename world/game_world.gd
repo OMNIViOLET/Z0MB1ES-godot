@@ -28,6 +28,14 @@ func _process(delta):
 	_camera.position = _heroes.get_child(0).position
 
 
+func make_goodie(loc: Vector2):
+	_spawn_manager.make_goodie(loc)
+
+
+func spawn(loc: Vector2, monster_type: int, midspawn: bool = false):
+	_spawn_manager._make_monster(loc, monster_type, midspawn)
+
+
 func get_hero(player: int) -> Hero:
 	for i in _heroes.get_child_count():
 		var hero = _heroes.get_child(i) as Hero

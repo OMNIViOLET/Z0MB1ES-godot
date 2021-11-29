@@ -21,9 +21,15 @@ enum ParticleType {
 }
 
 var catalog = {
+	ParticleType.BLOOD: load("res://particles/blood.tres"),
 	ParticleType.EXPLODE: load("res://particles/explode.tres"),
+	ParticleType.FACE_DIE: load("res://particles/face_die.tres"),
 	ParticleType.FACE_TRAIL: load("res://particles/face_trail.tres"),
-	ParticleType.MUZZLE_FLASH: load("res://particles/muzzle_flash.tres")
+	ParticleType.GEOBIT: load("res://particles/geobit.tres"),
+	ParticleType.GOO: load("res://particles/goo.tres"),
+	ParticleType.MUZZLE_FLASH: load("res://particles/muzzle_flash.tres"),
+	ParticleType.NEUCHUNK: load("res://particles/neuchunk.tres"),
+	ParticleType.PIXEL: load("res://particles/pixel.tres")
 }
 
 
