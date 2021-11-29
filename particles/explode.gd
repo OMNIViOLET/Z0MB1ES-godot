@@ -23,6 +23,6 @@ func render(particle: Particle):
 	var a = int((0.5 - particle.lifetime) * 2.0 * 9.0)
 	particle.texture = SPRITES
 	particle.region_enabled = true
-	particle.region_rect = Rect2(1024.0, a * 64.0, 64.0, 64.0)	
+	particle.region_rect = Rect2(1024.0, a * 64.0, 64.0, 64.0)
 	particle.modulate = Color(1.0, 1.0, 1.0, 0.7)
 	particle.scale = Vector2(particle.size, particle.size)

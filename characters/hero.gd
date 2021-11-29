@@ -28,9 +28,9 @@ var player = 0
 var player_tag = ""
 var world = null
 var score = 0
+var respawn_frame = 0.0
 
 var _angle = 0.0
-var _respawn_frame = 0.0
 var _shoot = Vector2.ZERO
 var _shoot_frame = 0.0
 var _spawn_frame = 0.0
@@ -44,15 +44,31 @@ onready var _body := $Body
 onready var _leg1 := $Leg1
 onready var _leg2 := $Leg2
 onready var _collider := $Collider
+onready var _underglow1 := $Underglow1
+onready var _underglow2 := $Underglow2
+onready var _underglow3 := $Underglow3
 onready var _sfx := $SFX
 
 
 func _ready():
 	_body.texture = HEROES[player]
+	var c = Color.white
+	match player:
+		0:
+			c = Color(0.2, 0.2, 1.0, 0.4)
+		1:
+			c = Color(1.0, 0.2, 0.2, 0.4)
+		2:
+			c = Color(1.0, 1.0, 0.2, 0.4)
+		3:
+			c = Color(0.2, 1.0, 0.2, 0.4)
+	_underglow1.modulate = c
+	_underglow2.modulate = c
+	_underglow3.modulate = c
 
 
 func _process(delta):
-	if not exists or _respawn_frame > 0.0:
+	if not exists or respawn_frame > 0.0:
 		_hide_player()
 	else:
 		_show_player()
@@ -115,9 +131,9 @@ func _get_spawn_location() -> Vector2:
 
 
 func _check_respawn(delta):
-	if _respawn_frame > 0.0:
-		_respawn_frame -= delta
-		if _respawn_frame <= 0.0:
+	if respawn_frame > 0.0:
+		respawn_frame -= delta
+		if respawn_frame <= 0.0:
 			_spawn_frame = 5.0
 			position = _get_spawn_location()
 		else:

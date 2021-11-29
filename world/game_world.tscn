@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://time/time_manager.gd" type="Script" id=1]
 [ext_resource path="res://world/game_world.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://map/map.tscn" type="PackedScene" id=4]
 [ext_resource path="res://map/map_overlay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://particles/particle_manager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/spawn_manager.gd" type="Script" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -22,6 +23,11 @@ music_manager_path = NodePath("../MusicManager")
 [node name="MusicManager" parent="Managers" instance=ExtResource( 3 )]
 time_manager_path = NodePath("../TimeManager")
 
+[node name="SpawnManager" type="Node" parent="Managers"]
+script = ExtResource( 7 )
+monster_container_path = NodePath("../../Monsters")
+world_path = NodePath("../..")
+
 [node name="Map" parent="." instance=ExtResource( 4 )]
 time_manager_path = NodePath("../Managers/TimeManager")
 
@@ -30,6 +36,8 @@ time_manager_path = NodePath("../Managers/TimeManager")
 [node name="AlphaParticleManager" parent="." instance=ExtResource( 6 )]
 
 [node name="Heroes" type="Node2D" parent="."]
+
+[node name="Monsters" type="Node2D" parent="."]
 
 [node name="AdditiveParticleManager" parent="." instance=ExtResource( 6 )]
 material = SubResource( 1 )

@@ -13,7 +13,7 @@ func init(particle: Particle, loc: Vector2, traj: Vector2, player: int, size: fl
 	particle.traj = traj
 	particle.player = player
 	particle.size = size
-	particle.flags = rand_range(0, 2)
+	particle.flags = randi() % 2
 	particle.alpha = true
 	particle.g = rand_range(-10.0, 10.0)
 	.init(particle, loc, traj, player, size, flags)

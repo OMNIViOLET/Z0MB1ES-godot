@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://characters/monsters/monster.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/monsters/geode.gd" type="Script" id=2]
+[ext_resource path="res://assets/gfx/geode.tres" type="Texture" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[node name="Geode" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+monster_type = 10
+
+[node name="Body1" type="Sprite" parent="." index="0"]
+material = SubResource( 2 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="Body2" type="Sprite" parent="." index="1"]
+material = SubResource( 2 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="Body3" type="Sprite" parent="." index="2"]
+modulate = Color( 1, 1, 1, 0.501961 )
+material = SubResource( 2 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+visible = false
+shape = SubResource( 1 )

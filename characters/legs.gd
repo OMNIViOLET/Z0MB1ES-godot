@@ -2,6 +2,7 @@ extends Sprite
 class_name Legs
 
 export(int) var leg_index
+export(float) var speed = 1.0
 
 var angle = 0.0
 var frame_time = 0.0
@@ -17,8 +18,8 @@ func _handle_rotation(delta: float):
 	var goal_angle = angle
 	var tl = traj.length()
 	if tl > 0.0:
-		goal_angle = traj.angle() + PI
-		frame_time += tl * delta * 11.0
+		goal_angle = traj.angle()
+		frame_time += tl * delta * 11.0 * speed
 		if frame_time > 6.28:
 			frame_time -= 6.28
 	else:
@@ -51,9 +52,9 @@ func _handle_rotation(delta: float):
 
 
 func _update_position():
-	var ta = angle + (3.14 if leg_index == 1 else 0.0)
+	var ta = angle + (PI if leg_index == 1 else 0.0)
 	position = Vector2(
 		cos(ta) * sin(frame_time) * 8.0,
 		sin(ta) * cos(frame_time) * 8.0 # original sin/sin possible bug?
 	)
-	rotation = angle
+	rotation = ta

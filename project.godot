@@ -9,10 +9,50 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Monster",
+"class": "Asteroid",
+"language": "GDScript",
+"path": "res://characters/monsters/asteroid.gd"
+}, {
+"base": "Asteroid",
+"class": "BigAsteroid",
+"language": "GDScript",
+"path": "res://characters/monsters/big_asteroid.gd"
+}, {
+"base": "Monster",
+"class": "BigGoo",
+"language": "GDScript",
+"path": "res://characters/monsters/big_goo.gd"
+}, {
+"base": "Monster",
+"class": "Blartard",
+"language": "GDScript",
+"path": "res://characters/monsters/blartard.gd"
+}, {
+"base": "Monster",
+"class": "Bomber",
+"language": "GDScript",
+"path": "res://characters/monsters/bomber.gd"
+}, {
 "base": "ParticleDef",
 "class": "Explode",
 "language": "GDScript",
 "path": "res://particles/explode.gd"
+}, {
+"base": "Monster",
+"class": "FaceTrail",
+"language": "GDScript",
+"path": "res://characters/monsters/face_trail.gd"
+}, {
+"base": "ParticleDef",
+"class": "FaceTrailParticle",
+"language": "GDScript",
+"path": "res://particles/face_trail_p.gd"
+}, {
+"base": "Monster",
+"class": "Fatty",
+"language": "GDScript",
+"path": "res://characters/monsters/fatty.gd"
 }, {
 "base": "Projectile",
 "class": "Flame",
@@ -23,6 +63,11 @@ _global_script_classes=[ {
 "class": "GameWorld",
 "language": "GDScript",
 "path": "res://world/game_world.gd"
+}, {
+"base": "Monster",
+"class": "Geode",
+"language": "GDScript",
+"path": "res://characters/monsters/geode.gd"
 }, {
 "base": "Area2D",
 "class": "Hero",
@@ -69,6 +114,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://characters/legs.gd"
 }, {
+"base": "Asteroid",
+"class": "LittleAsteroid",
+"language": "GDScript",
+"path": "res://characters/monsters/little_asteroid.gd"
+}, {
+"base": "Monster",
+"class": "LittleGoo",
+"language": "GDScript",
+"path": "res://characters/monsters/little_goo.gd"
+}, {
 "base": "Control",
 "class": "MainMenu",
 "language": "GDScript",
@@ -83,6 +138,16 @@ _global_script_classes=[ {
 "class": "MapOverlay",
 "language": "GDScript",
 "path": "res://map/map_overlay.gd"
+}, {
+"base": "Asteroid",
+"class": "MidAsteroid",
+"language": "GDScript",
+"path": "res://characters/monsters/mid_asteroid.gd"
+}, {
+"base": "Area2D",
+"class": "Monster",
+"language": "GDScript",
+"path": "res://characters/monsters/monster.gd"
 }, {
 "base": "Node",
 "class": "MusicManager",
@@ -145,6 +210,11 @@ _global_script_classes=[ {
 "path": "res://weapons/projectiles/rocket.gd"
 }, {
 "base": "Node",
+"class": "SpawnManager",
+"language": "GDScript",
+"path": "res://world/spawn_manager.gd"
+}, {
+"base": "Node",
 "class": "TimeManager",
 "language": "GDScript",
 "path": "res://time/time_manager.gd"
@@ -193,11 +263,25 @@ _global_script_classes=[ {
 "class": "WeaponShotty",
 "language": "GDScript",
 "path": "res://weapons/weapon_shotty.gd"
+}, {
+"base": "Monster",
+"class": "Zombie",
+"language": "GDScript",
+"path": "res://characters/monsters/zombie.gd"
 } ]
 _global_script_class_icons={
+"Asteroid": "",
+"BigAsteroid": "",
+"BigGoo": "",
+"Blartard": "",
+"Bomber": "",
 "Explode": "",
+"FaceTrail": "",
+"FaceTrailParticle": "",
+"Fatty": "",
 "Flame": "",
 "GameWorld": "",
+"Geode": "",
 "Hero": "",
 "IMAGWZIIText": "",
 "IMAGWZIITextLarge": "",
@@ -207,9 +291,13 @@ _global_script_class_icons={
 "Laser": "",
 "LaserBeam": "",
 "Legs": "",
+"LittleAsteroid": "",
+"LittleGoo": "",
 "MainMenu": "",
 "Map": "",
 "MapOverlay": "",
+"MidAsteroid": "",
+"Monster": "",
 "MusicManager": "",
 "MuzzleFlash": "",
 "Neutron": "",
@@ -222,6 +310,7 @@ _global_script_class_icons={
 "Projectile": "",
 "Quit": "",
 "Rocket": "",
+"SpawnManager": "",
 "TimeManager": "",
 "TimeSlice": "",
 "Weapon": "",
@@ -231,7 +320,8 @@ _global_script_class_icons={
 "WeaponNeutron": "",
 "WeaponRifle": "",
 "WeaponRockets": "",
-"WeaponShotty": ""
+"WeaponShotty": "",
+"Zombie": ""
 }
 
 [application]
@@ -243,7 +333,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Arrays="*res://util/arrays.gd"
+Rand="*res://util/rand.gd"
 Players="*res://players/players.gd"
 
 [display]
