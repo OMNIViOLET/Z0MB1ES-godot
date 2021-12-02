@@ -276,7 +276,7 @@ func _get_adjusted_count(count: int) -> int:
 	var c = 0
 	for i in Players.MAX_PLAYERS:
 		var hero = _world.get_hero(i)
-		if hero and hero.exists and hero.lives > 0:
+		if hero and hero.exists and Players.get_lives(hero.player) > 0:
 			c += 1
 	
 	match c:

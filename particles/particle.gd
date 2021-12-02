@@ -1,7 +1,6 @@
 extends Sprite
 class_name Particle
 
-var world
 var particle_type: int
 var traj = Vector2.ZERO
 var player = 0
@@ -17,11 +16,10 @@ var tag
 
 
 func set_alpha(alpha: bool):
+	var mat = material as CanvasItemMaterial
 	if not alpha:
-		var mat = material as CanvasItemMaterial
 		mat.blend_mode = CanvasItemMaterial.BLEND_MODE_MIX
 		z_index = 2
 	else:
-		var mat = material as CanvasItemMaterial
 		mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 		z_index = 6

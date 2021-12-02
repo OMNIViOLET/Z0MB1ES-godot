@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://time/time_manager.gd" type="Script" id=1]
 [ext_resource path="res://world/game_world.gd" type="Script" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://map/map_overlay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://particles/particle_manager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world/spawn_manager.gd" type="Script" id=7]
+[ext_resource path="res://text/dynamic_text.gd" type="Script" id=8]
+[ext_resource path="res://assets/gfx/sprites.png" type="Texture" id=9]
+[ext_resource path="res://world/fps.gd" type="Script" id=10]
+[ext_resource path="res://world/player_hud.gd" type="Script" id=11]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -57,3 +61,168 @@ limit_right = 2048
 limit_bottom = 1152
 smoothing_enabled = true
 editor_draw_drag_margin = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Player1" type="Node2D" parent="HUD"]
+script = ExtResource( 11 )
+heroes_path = NodePath("../../Heroes")
+
+[node name="PlayerName" type="Node2D" parent="HUD/Player1"]
+position = Vector2( 147, 90 )
+script = ExtResource( 8 )
+text = "Player1"
+size = 4.0
+
+[node name="Lives" type="Node2D" parent="HUD/Player1"]
+position = Vector2( 361, 90 )
+script = ExtResource( 8 )
+text = "x5"
+size = 4.0
+justify = 1
+
+[node name="Score" type="Node2D" parent="HUD/Player1"]
+position = Vector2( 361, 120 )
+script = ExtResource( 8 )
+text = "0"
+size = 3.0
+justify = 1
+
+[node name="Weapon" type="Sprite" parent="HUD/Player1"]
+position = Vector2( 174, 117 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 9 )
+offset = Vector2( -64, 0 )
+region_enabled = true
+region_rect = Rect2( 0, 1152, 128, 128 )
+
+[node name="Ammo" type="Node2D" parent="HUD/Player1"]
+position = Vector2( 176, 120 )
+script = ExtResource( 8 )
+text = "50"
+size = 3.0
+
+[node name="Player2" type="Node2D" parent="HUD"]
+script = ExtResource( 11 )
+slot = 1
+heroes_path = NodePath("../../Heroes")
+
+[node name="PlayerName" type="Node2D" parent="HUD/Player2"]
+position = Vector2( 403, 90 )
+script = ExtResource( 8 )
+text = "Player2"
+size = 4.0
+
+[node name="Lives" type="Node2D" parent="HUD/Player2"]
+position = Vector2( 617, 90 )
+script = ExtResource( 8 )
+text = "x5"
+size = 4.0
+justify = 1
+
+[node name="Score" type="Node2D" parent="HUD/Player2"]
+position = Vector2( 617, 120 )
+script = ExtResource( 8 )
+text = "0"
+size = 3.0
+justify = 1
+
+[node name="Weapon" type="Sprite" parent="HUD/Player2"]
+position = Vector2( 430, 117 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 9 )
+offset = Vector2( -64, 0 )
+region_enabled = true
+region_rect = Rect2( 0, 1152, 128, 128 )
+
+[node name="Ammo" type="Node2D" parent="HUD/Player2"]
+position = Vector2( 430, 120 )
+script = ExtResource( 8 )
+text = "50"
+size = 3.0
+
+[node name="Player3" type="Node2D" parent="HUD"]
+script = ExtResource( 11 )
+slot = 2
+heroes_path = NodePath("../../Heroes")
+
+[node name="PlayerName" type="Node2D" parent="HUD/Player3"]
+position = Vector2( 659, 90 )
+script = ExtResource( 8 )
+text = "Player3"
+size = 4.0
+
+[node name="Lives" type="Node2D" parent="HUD/Player3"]
+position = Vector2( 873, 90 )
+script = ExtResource( 8 )
+text = "x5"
+size = 4.0
+justify = 1
+
+[node name="Score" type="Node2D" parent="HUD/Player3"]
+position = Vector2( 873, 120 )
+script = ExtResource( 8 )
+text = "0"
+size = 3.0
+justify = 1
+
+[node name="Weapon" type="Sprite" parent="HUD/Player3"]
+position = Vector2( 686, 117 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 9 )
+offset = Vector2( -64, 0 )
+region_enabled = true
+region_rect = Rect2( 0, 1152, 128, 128 )
+
+[node name="Ammo" type="Node2D" parent="HUD/Player3"]
+position = Vector2( 686, 120 )
+script = ExtResource( 8 )
+text = "50"
+size = 3.0
+
+[node name="Player4" type="Node2D" parent="HUD"]
+script = ExtResource( 11 )
+slot = 3
+heroes_path = NodePath("../../Heroes")
+
+[node name="PlayerName" type="Node2D" parent="HUD/Player4"]
+position = Vector2( 915, 90 )
+script = ExtResource( 8 )
+text = "Player4"
+size = 4.0
+
+[node name="Lives" type="Node2D" parent="HUD/Player4"]
+position = Vector2( 1129, 90 )
+script = ExtResource( 8 )
+text = "x5"
+size = 4.0
+justify = 1
+
+[node name="Score" type="Node2D" parent="HUD/Player4"]
+position = Vector2( 1129, 120 )
+script = ExtResource( 8 )
+text = "0"
+size = 3.0
+justify = 1
+
+[node name="Weapon" type="Sprite" parent="HUD/Player4"]
+position = Vector2( 942, 117 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 9 )
+offset = Vector2( -64, 0 )
+region_enabled = true
+region_rect = Rect2( 0, 1152, 128, 128 )
+
+[node name="Ammo" type="Node2D" parent="HUD/Player4"]
+position = Vector2( 942, 120 )
+script = ExtResource( 8 )
+text = "50"
+size = 3.0
+
+[node name="FPS" type="Node2D" parent="HUD"]
+position = Vector2( 50, 50 )
+script = ExtResource( 10 )
+text = "60"
+size = 3.0
+justify = 2
+flashing = true

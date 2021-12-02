@@ -45,6 +45,18 @@ func set_points(player: int, points: int):
 	get_player_info(player).points = points
 
 
+func get_lives(player: int) -> int:
+	return get_player_info(player).lives
+
+
+func add_lives(player: int, lives: int):
+	get_player_info(player).lives += lives
+
+
+func set_lives(player: int, lives: int):
+	get_player_info(player).lives = lives
+
+
 func get_player_info(slot: int) -> PlayerInfo:
 	return players[slot]
 

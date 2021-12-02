@@ -18,7 +18,7 @@ func init(particle: Particle, loc: Vector2, traj: Vector2, player: int, size: fl
 	text.flash_color_max = 1.0
 	text.flash_color_min = 0.75
 	text.flash_color_alpha = 0.8
-	#text.z_index = 8
+	text.z_index = 8
 	particle.add_child(text)
 	.init(particle, loc, traj, player, size, flags)
 
@@ -32,3 +32,4 @@ func process(delta: float, particle: Particle):
 func destroy(particle: Particle):
 	if particle.get_child_count() > 0:
 		particle.get_child(0).queue_free()
+	.destroy(particle)

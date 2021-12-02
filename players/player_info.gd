@@ -17,7 +17,7 @@ var device_type = DeviceType.KEYBOARD
 var player_name = "player"
 var player_state = PlayerState.OUT
 var points = 0
-
+var lives = 5
 
 func set_device(device_id: int, device_type: int):
 	self.device_id = device_id

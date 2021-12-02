@@ -23,7 +23,6 @@ var WEAPONS = {
 }
 
 var exists = false
-var lives = 0
 var player = 0
 var player_tag = ""
 var world = null
@@ -110,10 +109,10 @@ func spawn_center():
 
 
 func spawn(loc: Vector2):
-	lives = 5
+	Players.set_lives(player, 5)
 	position = loc
 	exists = true
-	set_weapon(Weapon.WeaponType.FLAMETHROWER, 9000)
+	set_weapon(Weapon.WeaponType.MACHINE_GUN, 9000)
 	score = 0
 
 

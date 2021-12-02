@@ -24,8 +24,6 @@ func _process(delta):
 			particle.set_alpha(false)
 			particle.visible = false
 			continue
-		particle.visible = true
-		particle.region_enabled = false
 		var def = catalog.get_particle_def(particle.particle_type)
 		def.process(delta, particle)
 		def.render(particle)
@@ -36,13 +34,19 @@ func add_particle(particle_type: int, loc: Vector2, traj: Vector2, player: int, 
 		var particle = particles[i] as Particle
 		if particle.exists:
 			continue
+
 		# Reset particle
-		particle.set_alpha(false)
-		particle.modulate = Color.white
 		particle.texture = null
+		particle.modulate = Color.white
+		particle.position = Vector2.ZERO
 		particle.rotation = 0.0
 		particle.scale = Vector2.ONE
+		particle.set_alpha(false)
+		particle.region_enabled = false
+		particle.region_rect = Rect2(0.0, 0.0, 0.0, 0.0)
+		particle.particle_type = particle_type
+		particle.visible = true
+
 		var def = catalog.get_particle_def(particle_type)
 		def.init(particle, loc, traj, player, size, flags)
-		particle.particle_type = particle_type
 		break
