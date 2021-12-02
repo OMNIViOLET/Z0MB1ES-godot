@@ -36,7 +36,12 @@ func add_particle(particle_type: int, loc: Vector2, traj: Vector2, player: int, 
 		var particle = particles[i] as Particle
 		if particle.exists:
 			continue
+		# Reset particle
 		particle.set_alpha(false)
+		particle.modulate = Color.white
+		particle.texture = null
+		particle.rotation = 0.0
+		particle.scale = Vector2.ONE
 		var def = catalog.get_particle_def(particle_type)
 		def.init(particle, loc, traj, player, size, flags)
 		particle.particle_type = particle_type

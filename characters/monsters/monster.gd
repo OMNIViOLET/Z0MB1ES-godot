@@ -149,6 +149,18 @@ func _on_Monster_area_entered(area):
 			projectile.queue_free()
 
 
+func _add_points(player: int, points: int):
+	Players.add_points(player, points)
+	world.add_particle(
+		ParticleCatalog.ParticleType.SCORE,
+		position,
+		Vector2.ZERO,
+		0,
+		0.0,
+		points
+	)
+
+
 func _make_blood_chunks(loc: Vector2, traj: Vector2):
 	for i in range(0, 10):
 		world.add_particle(

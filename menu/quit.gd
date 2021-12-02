@@ -1,14 +1,14 @@
-extends Control
+extends Node2D
 class_name Quit
 
 var _primary_device_type = PlayerInfo.DeviceType.JOYPAD
 var _selected = 0
 
-onready var _ok := $ButtonContainer/OK
-onready var _cancel := $ButtonContainer/Cancel
+onready var _ok := $Ok
+onready var _cancel := $Cancel
 onready var _options = [
-	$TextContainer/OptionsContainer/Accept,
-	$TextContainer/OptionsContainer/Cancel
+	$Option1,
+	$Option2
 ]
 
 

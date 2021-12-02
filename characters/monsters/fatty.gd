@@ -16,7 +16,7 @@ func spawn(loc: Vector2, midspawn: bool = false):
 func _on_monster_hit(projectile: Projectile):
 	hp -= 1
 	if hp <= 0:
-		Players.add_points(projectile.player, 500)
+		_add_points(projectile.player, 500)
 		_make_blood_chunks(position, projectile.traj)
 		_make_blood_splode(position, 10, rand_range(0.5, 1.0), 300.0)
 		exists = false

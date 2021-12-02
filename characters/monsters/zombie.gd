@@ -13,7 +13,7 @@ func spawn(loc: Vector2, midspawn: bool = false):
 
 
 func _on_monster_hit(projectile: Projectile):
-	Players.add_points(projectile.player, 100)
+	_add_points(projectile.player, 100)
 	_make_blood_chunks(position, projectile.traj)
 	exists = false
 	if Rand.coin_toss(0.01):

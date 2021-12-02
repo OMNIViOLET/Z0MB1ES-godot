@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 class_name MainMenu
 
 const GO_TIME = 1.0
@@ -17,11 +17,11 @@ var _device_grace = {}
 var _go_timer = 0.0
 var _primary_device_type = PlayerInfo.DeviceType.JOYPAD
 
-onready var _subtitle := $TitleContainer/Subtitle
-onready var _ok := $ButtonContainer/OK
-onready var _cancel := $ButtonContainer/Cancel
-onready var _scores := $ButtonContainer/Scores
-onready var _settings := $ButtonContainer/Settings
+onready var _subtitle := $Subtitle
+onready var _ok := $Ok
+onready var _cancel := $Cancel
+onready var _scores := $Scores
+onready var _settings := $Settings
 
 
 func _ready():

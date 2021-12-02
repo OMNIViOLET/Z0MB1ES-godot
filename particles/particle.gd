@@ -1,6 +1,7 @@
 extends Sprite
 class_name Particle
 
+var world
 var particle_type: int
 var traj = Vector2.ZERO
 var player = 0
@@ -12,6 +13,7 @@ var g = 0.0
 var b = 0.0
 var a = 0.0
 var exists = false
+var tag
 
 
 func set_alpha(alpha: bool):

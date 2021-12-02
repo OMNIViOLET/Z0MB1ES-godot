@@ -18,5 +18,5 @@ func spawn(loc: Vector2, midspawn: bool = false):
 func _on_monster_hit(projectile: Projectile):
 	exists = false
 	_make_goo(projectile.position, 5, rand_range(0.3, 0.4), 200.0)
-	Players.add_points(projectile.player, 50)
+	_add_points(projectile.player, 50)
 	._on_monster_hit(projectile)

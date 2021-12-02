@@ -14,7 +14,7 @@ func _on_monster_hit(projectile: Projectile):
 	for i in range(0, 3):
 		world.spawn(position, Monster.MonsterType.LITTLE_ASTEROID)
 	_make_pixel_splode(projectile.position, 7, rand_range(0.3, 0.7), 300.0)
-	Players.add_points(projectile.player, 150.0)
+	_add_points(projectile.player, 150)
 	if Rand.coin_toss(0.02):
 		world.make_goodie(position)
 	._on_monster_hit(projectile)

@@ -1,11 +1,11 @@
-extends VBoxContainer
+extends Node2D
 class_name PlayerBox
 
 export(int) var slot = 0
 
-onready var _player_name := $PlayerName
-onready var _text1 := $TextBox/Text1
-onready var _text2 := $TextBox/Text2
+onready var _player_name := get_node("PlayerName")
+onready var _text1 := get_node("Text1")
+onready var _text2 := get_node("Text2")
 
 
 func _ready():
@@ -20,6 +20,7 @@ func update_player_box():
 		return
 		
 	_player_name.text = info.player_name
+	_player_name.modulate = Color.gray
 
 	_text1.modulate = Color.white
 	_text1.flashing = false

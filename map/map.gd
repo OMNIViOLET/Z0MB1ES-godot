@@ -32,8 +32,8 @@ onready var _map_texture := $MapTexture
 onready var _space_overlay := $MapTexture/SpaceOverlay
 onready var _jungle_overlay1 := $MapTexture/JungleOverlay1
 onready var _jungle_overlay2 := $MapTexture/JungleOverlay2
-onready var _text1 = $TextContainer/VBoxContainer/Text1
-onready var _text2 = $TextContainer/VBoxContainer/Text2
+onready var _text1 = $Text1
+onready var _text2 = $Text2
 onready var _time_manager := get_node(time_manager_path) as TimeManager
 onready var _thresh := $MapTexture/Thresh
 
@@ -202,7 +202,7 @@ func _draw_map_trans(texture: Texture, target: Texture, t: float):
 
 
 func _draw_text(text: String, location: int, color: Color = Color.white, flashing: bool = false):
-	var label: IMAGWZIIText = null
+	var label: DynamicText = null
 	match location:
 		TextLocation.TOP:
 			label = _text1

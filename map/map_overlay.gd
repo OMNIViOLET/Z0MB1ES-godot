@@ -56,20 +56,13 @@ var _laser_index = 0
 var _light_index = 0
 var _max_lights = 0
 var _max_lasers = 0
-var _fonts = {
-	50: load("res://assets/font/imagwzii_50.fnt"),
-	60: load("res://assets/font/imagwzii_60.fnt"),
-	70: load("res://assets/font/imagwzii_70.fnt"),
-	80: load("res://assets/font/imagwzii_80.fnt"),
-	110: load("res://assets/font/imagwzii_110.fnt")
-}
 
 onready var _lasers_container := $Lasers
 onready var _lights_container := $Lights
 onready var _map := get_node(map_path) as Map
-onready var _text1 := $TextContainer/VBoxContainer/Text1
-onready var _text2 := $TextContainer/VBoxContainer/Text2
-onready var _center_text := $TextContainer/CenterText
+onready var _text1 := $Text1
+onready var _text2 := $Text2
+onready var _center_text := $CenterText
 onready var _time_manager := get_node(time_manager_path) as TimeManager
 
 
@@ -607,7 +600,7 @@ func _reset_text():
 
 
 func _draw_text(text: String, size: int, location: int, color: Color = Color.white, flashing: bool = false):
-	var label: IMAGWZIIText = null
+	var label: DynamicText = null
 	match location:
 		TextLocation.TOP:
 			label = _text1
@@ -616,14 +609,10 @@ func _draw_text(text: String, size: int, location: int, color: Color = Color.whi
 		TextLocation.CENTER:
 			label = _center_text
 
-	label.add_font_override("font", _fonts[size])
 	label.text = text
 	label.modulate = color
 	label.modulate.a = 0.2
 	label.flashing = flashing
-	
-	if location == TextLocation.CENTER:
-		label.rect_position.y = (Map.MAP_SIZE.y - (size * 5.0)) * 0.5
 
 
 func _draw_imagwzii(progress: int):

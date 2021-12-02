@@ -29,7 +29,8 @@ var catalog = {
 	ParticleType.GOO: load("res://particles/goo.tres"),
 	ParticleType.MUZZLE_FLASH: load("res://particles/muzzle_flash.tres"),
 	ParticleType.NEUCHUNK: load("res://particles/neuchunk.tres"),
-	ParticleType.PIXEL: load("res://particles/pixel.tres")
+	ParticleType.PIXEL: load("res://particles/pixel.tres"),
+	ParticleType.SCORE: load("res://particles/score.tres")
 }
 
 

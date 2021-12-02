@@ -1,166 +1,171 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://menu/main_menu.gd" type="Script" id=1]
-[ext_resource path="res://ui/imagwzii_text_large.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/imagwzii_text_medium.tscn" type="PackedScene" id=3]
-[ext_resource path="res://menu/player_box.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/font/imagwzii_6.fnt" type="BitmapFont" id=5]
+[ext_resource path="res://menu/player_box.gd" type="Script" id=2]
+[ext_resource path="res://text/dynamic_text.gd" type="Script" id=6]
 
-[node name="MainMenu" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="MainMenu" type="Node2D"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="TitleContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-margin_top = 50.0
-margin_bottom = 255.0
-custom_constants/separation = 30
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title1" parent="TitleContainer" instance=ExtResource( 2 )]
-margin_right = 1280.0
-margin_bottom = 60.0
+[node name="Title1" type="Node2D" parent="."]
+position = Vector2( 640, 100 )
+script = ExtResource( 6 )
 text = "I MAED A GAM3 W1TH"
-align = 1
+size = 12.0
+justify = 2
 flashing = true
+flash_color_min = 0.4
 
-[node name="Title2" parent="TitleContainer" instance=ExtResource( 2 )]
-margin_top = 90.0
-margin_right = 1280.0
-margin_bottom = 150.0
+[node name="Title2" type="Node2D" parent="."]
+position = Vector2( 640, 200 )
+script = ExtResource( 6 )
 text = "Z0MBIES 1N IT!!!1"
-align = 1
+size = 12.0
+justify = 2
 flashing = true
+flash_color_min = 0.4
 
-[node name="Spacer" parent="TitleContainer" instance=ExtResource( 3 )]
-margin_top = 180.0
-margin_right = 1280.0
-margin_bottom = 205.0
-align = 1
-flashing = true
-
-[node name="Subtitle" parent="TitleContainer" instance=ExtResource( 3 )]
+[node name="Subtitle" type="Node2D" parent="."]
 visible = false
-margin_top = 235.0
-margin_right = 1280.0
-margin_bottom = 265.0
-custom_fonts/font = ExtResource( 5 )
+position = Vector2( 640, 300 )
+script = ExtResource( 6 )
 text = "(IT'S A TW1N ST1CK SH00T3R)"
-align = 1
+size = 6.0
+justify = 2
 flashing = true
+flash_color_min = 0.4
 
-[node name="PlayerContainer" type="HBoxContainer" parent="."]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-custom_constants/separation = 40
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Player1" type="Node2D" parent="."]
+script = ExtResource( 2 )
 
-[node name="PlayerBox1" parent="PlayerContainer" instance=ExtResource( 4 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 100.0
-margin_right = 340.0
-margin_bottom = 110.0
+[node name="PlayerName" type="Node2D" parent="Player1"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+position = Vector2( 256, 380 )
+script = ExtResource( 6 )
+text = "Player1"
+size = 5.0
+justify = 2
 
-[node name="PlayerBox2" parent="PlayerContainer" instance=ExtResource( 4 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 380.0
-margin_right = 620.0
-margin_bottom = 110.0
+[node name="Text1" type="Node2D" parent="Player1"]
+position = Vector2( 256, 430 )
+script = ExtResource( 6 )
+text = "j0in"
+size = 5.0
+justify = 2
+
+[node name="Text2" type="Node2D" parent="Player1"]
+position = Vector2( 256, 465 )
+script = ExtResource( 6 )
+text = "game!1"
+size = 5.0
+justify = 2
+
+[node name="Player2" type="Node2D" parent="."]
+script = ExtResource( 2 )
 slot = 1
 
-[node name="PlayerBox3" parent="PlayerContainer" instance=ExtResource( 4 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 660.0
-margin_right = 900.0
-margin_bottom = 110.0
+[node name="PlayerName" type="Node2D" parent="Player2"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+position = Vector2( 512, 380 )
+script = ExtResource( 6 )
+text = "Player2"
+size = 5.0
+justify = 2
+
+[node name="Text1" type="Node2D" parent="Player2"]
+position = Vector2( 512, 430 )
+script = ExtResource( 6 )
+text = "j0in"
+size = 5.0
+justify = 2
+
+[node name="Text2" type="Node2D" parent="Player2"]
+position = Vector2( 512, 465 )
+script = ExtResource( 6 )
+text = "game!1"
+size = 5.0
+justify = 2
+
+[node name="Player3" type="Node2D" parent="."]
+script = ExtResource( 2 )
 slot = 2
 
-[node name="PlayerBox4" parent="PlayerContainer" instance=ExtResource( 4 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 940.0
-margin_right = 1180.0
-margin_bottom = 110.0
+[node name="PlayerName" type="Node2D" parent="Player3"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+position = Vector2( 768, 380 )
+script = ExtResource( 6 )
+text = "Player3"
+size = 5.0
+justify = 2
+
+[node name="Text1" type="Node2D" parent="Player3"]
+position = Vector2( 768, 430 )
+script = ExtResource( 6 )
+text = "j0in"
+size = 5.0
+justify = 2
+
+[node name="Text2" type="Node2D" parent="Player3"]
+position = Vector2( 768, 465 )
+script = ExtResource( 6 )
+text = "game!1"
+size = 5.0
+justify = 2
+
+[node name="Player4" type="Node2D" parent="."]
+script = ExtResource( 2 )
 slot = 3
 
-[node name="ButtonContainer" type="GridContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -400.0
-margin_top = -170.0
-margin_right = 400.0
-margin_bottom = -95.0
-custom_constants/vseparation = 25
-columns = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PlayerName" type="Node2D" parent="Player4"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+position = Vector2( 1024, 380 )
+script = ExtResource( 6 )
+text = "Player4"
+size = 5.0
+justify = 2
 
-[node name="OK" parent="ButtonContainer" instance=ExtResource( 3 )]
+[node name="Text1" type="Node2D" parent="Player4"]
+position = Vector2( 1024, 430 )
+script = ExtResource( 6 )
+text = "j0in"
+size = 5.0
+justify = 2
+
+[node name="Text2" type="Node2D" parent="Player4"]
+position = Vector2( 1024, 465 )
+script = ExtResource( 6 )
+text = "game!1"
+size = 5.0
+justify = 2
+
+[node name="Ok" type="Node2D" parent="."]
 modulate = Color( 0, 1, 0, 1 )
-margin_right = 222.0
-margin_bottom = 30.0
-custom_fonts/font = ExtResource( 5 )
+position = Vector2( 340, 580 )
+script = ExtResource( 6 )
 text = "(A) ok"
-align = 1
+size = 6.0
+justify = 2
 
-[node name="Spacer" parent="ButtonContainer" instance=ExtResource( 3 )]
-modulate = Color( 0, 1, 0, 1 )
-margin_left = 226.0
-margin_top = 2.0
-margin_right = 532.0
-margin_bottom = 27.0
-size_flags_horizontal = 3
-align = 1
-
-[node name="Cancel" parent="ButtonContainer" instance=ExtResource( 3 )]
+[node name="Cancel" type="Node2D" parent="."]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 536.0
-margin_right = 800.0
-margin_bottom = 30.0
-custom_fonts/font = ExtResource( 5 )
+position = Vector2( 340, 640 )
+script = ExtResource( 6 )
 text = "(B) cancel"
-align = 1
+size = 6.0
+justify = 2
 
-[node name="Scores" parent="ButtonContainer" instance=ExtResource( 3 )]
+[node name="Scores" type="Node2D" parent="."]
 modulate = Color( 1, 1, 0, 1 )
-margin_top = 55.0
-margin_right = 222.0
-margin_bottom = 85.0
-custom_fonts/font = ExtResource( 5 )
+position = Vector2( 940, 580 )
+script = ExtResource( 6 )
 text = "(Y) scores"
-align = 1
+size = 6.0
+justify = 2
 
-[node name="Spacer2" parent="ButtonContainer" instance=ExtResource( 3 )]
-modulate = Color( 0, 1, 0, 1 )
-margin_left = 226.0
-margin_top = 57.0
-margin_right = 532.0
-margin_bottom = 82.0
-size_flags_horizontal = 3
-align = 1
-
-[node name="Settings" parent="ButtonContainer" instance=ExtResource( 3 )]
+[node name="Settings" type="Node2D" parent="."]
 modulate = Color( 0, 0, 1, 1 )
-margin_left = 536.0
-margin_top = 55.0
-margin_right = 800.0
-margin_bottom = 85.0
-custom_fonts/font = ExtResource( 5 )
+position = Vector2( 940, 640 )
+script = ExtResource( 6 )
 text = "(X) settings"
-align = 1
+size = 6.0
+justify = 2

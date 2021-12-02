@@ -88,7 +88,7 @@ func _on_monster_hit(projectile: Projectile):
 			0
 		)
 	exists = false
-	Players.add_points(projectile.player, 120)
+	_add_points(projectile.player, 120)
 	if Rand.coin_toss(0.2):
 		world.make_goodie(position)
 	._on_monster_hit(projectile)

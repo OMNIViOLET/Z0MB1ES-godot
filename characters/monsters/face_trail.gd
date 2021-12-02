@@ -76,7 +76,7 @@ func _on_monster_hit(projectile: Projectile):
 					)
 		if Rand.coin_toss(0.4):
 			world.make_goodie(position)
-		Players.add_points(projectile.player, 600)
+		_add_points(projectile.player, 600)
 	else:
 		for i in range(0, 4):
 			world.add_particle(

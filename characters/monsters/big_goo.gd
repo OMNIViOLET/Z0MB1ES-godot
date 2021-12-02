@@ -18,7 +18,7 @@ func _on_monster_hit(projectile: Projectile):
 	hp -= 1
 	if hp <= 0:
 		_make_goo(projectile.position, 10, rand_range(0.5, 1.0), 300.0)
-		Players.add_points(projectile.player, 100)
+		_add_points(projectile.player, 100)
 		exists = false
 		if Rand.coin_toss(0.4):
 			world.make_goodie(position)
