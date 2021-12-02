@@ -20,7 +20,7 @@ enum Phase {
 	END
 }
 
-const START_PHASE = Phase.METAL
+const START_PHASE = Phase.INTRO_THEME
 
 export(NodePath) var music_manager_path
 

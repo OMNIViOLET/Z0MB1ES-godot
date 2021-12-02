@@ -3,14 +3,12 @@ class_name Score
 
 
 func init(particle: Particle, loc: Vector2, traj: Vector2, player: int, size: float, flags: int):
-	particle.lifetime = rand_range(0.0, 0.5)
+	particle.lifetime = 0.5
 	particle.position = loc
 	particle.traj = Vector2(0.0, -350.0)
 	particle.player = -1
 	particle.size = size
 	particle.flags = flags
-	particle.g = rand_range(-10.0, 10.0)
-	particle.set_alpha(false)
 
 	var text = DynamicText.new()
 	text.set_score(flags)
@@ -20,7 +18,7 @@ func init(particle: Particle, loc: Vector2, traj: Vector2, player: int, size: fl
 	text.flash_color_max = 1.0
 	text.flash_color_min = 0.75
 	text.flash_color_alpha = 0.8
-	text.z_index = 8
+	#text.z_index = 8
 	particle.add_child(text)
 	.init(particle, loc, traj, player, size, flags)
 

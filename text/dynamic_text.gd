@@ -19,7 +19,6 @@ export(float) var flash_color_alpha = 1.0
 var _shapes = []
 var _shape_map = {}
 var _width = 0
-var _original_modulate = Color.white
 
 
 func _init():
@@ -39,18 +38,20 @@ func _draw():
 		Justify.CENTER:
 			loc.x -= _width * 0.5
 	loc.y -= size * 2.5
-
-	for i in _shapes.size():
-		var shape = _shapes[i] as TextShape
-		var render_color = modulate
-		if flashing:
-			render_color = Color(
+	
+	var shape_color = Color(
 				rand_range(flash_color_min, flash_color_max),
 				rand_range(flash_color_min, flash_color_max),
 				rand_range(flash_color_min, flash_color_max),
 				flash_color_alpha
 			)
-		shape.render(self, loc, size, render_color)
+	
+	for i in _shapes.size():
+		var shape = _shapes[i] as TextShape
+		if flashing:
+			shape.render(self, loc, size, shape_color)
+		else:
+			shape.render(self, loc, size, Color.white)
 		loc.x += shape.get_size(size)
 
 
@@ -83,10 +84,6 @@ func _get_justify() -> int:
 
 
 func _set_flashing(value: bool):
-	if value and not flashing:
-		_original_modulate = modulate
-	elif not value and flashing:
-		modulate = _original_modulate
 	flashing = value
 	update()
 
