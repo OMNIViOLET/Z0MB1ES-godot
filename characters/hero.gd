@@ -28,6 +28,8 @@ var player_tag = ""
 var world = null
 var score = 0
 var respawn_frame = 0.0
+var initials = [ 'A', 'A', 'A' ]
+var name_in: int = 0
 
 var _angle = 0.0
 var _shoot = Vector2.ZERO
@@ -50,6 +52,10 @@ onready var _sfx := $SFX
 
 
 func _ready():
+	initials.append(65)
+	initials.append(65)
+	initials.append(65)
+
 	_body.texture = HEROES[player]
 	var c = Color.white
 	match player:
@@ -71,8 +77,17 @@ func _process(delta):
 		_hide_player()
 	else:
 		_show_player()
+
+	if name_in > 0:
+		if name_in >= 4:
+			respawn_frame -= delta
+			if respawn_frame <= 0.0:
+				exists = false
+		return
 	
-	_check_respawn(delta)
+	if not _check_respawn(delta):
+		return
+		
 	_check_spawn(delta)
 	
 	if not exists:
@@ -82,6 +97,9 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	if respawn_frame > 0.0:
+		return
+		
 	_shoot_and_move(delta)
 
 
@@ -109,7 +127,7 @@ func spawn_center():
 
 
 func spawn(loc: Vector2):
-	Players.set_lives(player, 5)
+	Players.set_lives(player, 1)
 	position = loc
 	exists = true
 	set_weapon(Weapon.WeaponType.MACHINE_GUN, 9000)
@@ -132,14 +150,15 @@ func _get_spawn_location() -> Vector2:
 	return (Map.MAP_SIZE * 0.5) + offset
 
 
-func _check_respawn(delta):
+func _check_respawn(delta) -> bool:
 	if respawn_frame > 0.0:
 		respawn_frame -= delta
 		if respawn_frame <= 0.0:
 			_spawn_frame = 5.0
 			position = _get_spawn_location()
 		else:
-			return
+			return false
+	return true
 
 
 func _check_spawn(delta):
@@ -223,4 +242,57 @@ func _shoot_and_move(delta):
 		position.y = Map.MAP_SIZE.y - BOUNDRY_BUFFER
 	
 	_body.rotation = _angle
+
+
+func _kill():
+	Players.add_lives(player, -1)
+	_weapon = Weapon.WeaponType.RIFLE
+	_speed_frame = 0.0
+	_make_blood_splode(position, 10, rand_range(0.5, 1.0), 300.0)
+	world.add_particle(
+		ParticleCatalog.ParticleType.DYING,
+		position,
+		Vector2.ZERO,
+		player,
+		0.0,
+		0
+	)
+	
+	respawn_frame = 3.0
+	if Players.get_lives(player) <= 0:
+		name_in = true
+		initials[0] = 'A'
+		initials[1] = 'A'
+		initials[2] = 'A'
+
+
+func _make_blood_splode(loc: Vector2, reps: int, size: float, traj: float):
+	for i in range(0, reps):
+		world.add_particle(
+			ParticleCatalog.ParticleType.BLOOD,
+			loc,
+			Rand.vec2(-traj, traj, -traj, traj),
+			0,
+			size,
+			0
+		)
+
+
+func _on_Hero_area_entered(area):
+	if not exists or respawn_frame > 0.0:
+		return
+		
+	var monster = area as Monster
+	if not monster or not monster.exists:
+		return
+	
+	if _spawn_frame > 0.0:
+		var projectile = Projectile.new()
+		projectile.position = position
+		projectile.traj = monster.position - position
+		projectile.player = player
+		monster._on_monster_hit(projectile)
+	else:
+		_kill()
+		
 		

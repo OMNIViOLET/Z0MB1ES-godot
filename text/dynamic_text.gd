@@ -12,6 +12,7 @@ export(String) var text = "" setget _set_text, _get_text
 export(float) var size = 1.0 setget _set_text_size, _get_text_size
 export(Justify) var justify: int = Justify.LEFT setget _set_justify, _get_justify
 export(bool) var flashing = false setget _set_flashing, _get_flashing
+export(int) var flashing_character = -1 setget _set_flashing_character, _get_flashing_character
 export(float) var flash_color_min = 0.5
 export(float) var flash_color_max = 1.0
 export(float) var flash_color_alpha = 1.0
@@ -26,7 +27,7 @@ func _init():
 
 
 func _process(_delta):
-	if flashing:
+	if flashing or flashing_character >= 0:
 		update()
 
 
@@ -48,7 +49,7 @@ func _draw():
 	
 	for i in _shapes.size():
 		var shape = _shapes[i] as TextShape
-		if flashing:
+		if flashing or flashing_character == i:
 			shape.render(self, loc, size, shape_color)
 		else:
 			shape.render(self, loc, size, Color.white)
@@ -90,6 +91,15 @@ func _set_flashing(value: bool):
 
 func _get_flashing() -> bool:
 	return flashing
+
+
+func _set_flashing_character(value: int):
+	flashing_character = value
+	update()
+
+
+func _get_flashing_character() -> int:
+	return flashing_character
 
 
 func _set_text_size(value: float):

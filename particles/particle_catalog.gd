@@ -22,6 +22,7 @@ enum ParticleType {
 
 var catalog = {
 	ParticleType.BLOOD: load("res://particles/blood.tres"),
+	ParticleType.DYING: load("res://particles/dying.tres"),
 	ParticleType.EXPLODE: load("res://particles/explode.tres"),
 	ParticleType.FACE_DIE: load("res://particles/face_die.tres"),
 	ParticleType.FACE_TRAIL: load("res://particles/face_trail.tres"),
