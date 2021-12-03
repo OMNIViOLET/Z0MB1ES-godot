@@ -28,6 +28,7 @@ time_manager_path = NodePath("../TimeManager")
 [node name="SpawnManager" type="Node" parent="Managers"]
 script = ExtResource( 7 )
 monster_container_path = NodePath("../../Monsters")
+powerups_container_path = NodePath("../../Powerups")
 world_path = NodePath("../..")
 
 [node name="Map" parent="." instance=ExtResource( 4 )]
@@ -36,6 +37,8 @@ time_manager_path = NodePath("../Managers/TimeManager")
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="AlphaParticleManager" parent="." instance=ExtResource( 6 )]
+
+[node name="Powerups" type="Node2D" parent="."]
 
 [node name="Heroes" type="Node2D" parent="."]
 

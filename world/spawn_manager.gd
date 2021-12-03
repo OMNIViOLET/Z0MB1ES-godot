@@ -6,6 +6,7 @@ signal the_end_is_nigh()
 const MAX_MONSTERS = 384
 
 export(NodePath) var monster_container_path
+export(NodePath) var powerups_container_path
 export(NodePath) var world_path
 
 var MONSTERS = {
@@ -22,11 +23,14 @@ var MONSTERS = {
 	Monster.MonsterType.ZOMBIE: load("res://characters/monsters/zombie.tscn")
 }
 
+var POWERUP = load("res://powerups/powerup.tscn")
+
 var monsters = []
 var num_monsters = 0
 var next_idx = 0
 
 onready var _monster_container := get_node(monster_container_path)
+onready var _powerups_container := get_node(powerups_container_path)
 onready var _world := get_node(world_path) as GameWorld
 
 
@@ -251,8 +255,10 @@ func do_click(phase: int, beats: int):
 
 
 func make_goodie(loc: Vector2):
-	#TODO: spawn power up
-	pass
+	var powerup = POWERUP.instance() as Powerup
+	powerup.position = loc
+	powerup.powerup_type = randi() % 9
+	_powerups_container.call_deferred("add_child", powerup)
 
 
 func _clear_monsters():
@@ -268,8 +274,10 @@ func _clear_monsters():
 func _make_goodies(count: int):
 	for i in count:
 		if Rand.coin_toss(0.3):
-			#TODO: spawn power up
-			pass
+			var powerup = POWERUP.instance() as Powerup
+			powerup.position = Rand.vec2(400.0, Map.MAP_SIZE.x - 400.0, 400.0, Map.MAP_SIZE.y - 400.0)
+			powerup.powerup_type = randi() % 6
+			_powerups_container.call_deferred("add_child", powerup)
 
 
 func _get_adjusted_count(count: int) -> int:

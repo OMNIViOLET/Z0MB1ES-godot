@@ -6,6 +6,7 @@ var HERO = load("res://characters/hero.tscn")
 onready var _camera := $Camera2D
 onready var _heroes := $Heroes
 onready var _projectiles := $Projectiles
+onready var _powerups := $Powerups
 onready var _alpha_particle_manager := $AlphaParticleManager
 onready var _additive_particle_manager := $AdditiveParticleManager
 onready var _time_manager := $Managers/TimeManager

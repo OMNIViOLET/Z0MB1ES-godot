@@ -39,16 +39,17 @@ var _speed_frame = 0.0
 var _traj = Vector2.ZERO
 var _weapon = Weapon.WeaponType.RIFLE
 var _ammo = 0
+var _colliding = []
 
 
 onready var _body := $Body
 onready var _leg1 := $Leg1
 onready var _leg2 := $Leg2
 onready var _collider := $Collider
-onready var _underglow1 := $Underglow1
-onready var _underglow2 := $Underglow2
-onready var _underglow3 := $Underglow3
+onready var _underglow := $Underglow
 onready var _sfx := $SFX
+onready var _shield1 := $Shield1
+onready var _shield2 := $Shield1
 
 
 func _ready():
@@ -57,19 +58,9 @@ func _ready():
 	initials.append(65)
 
 	_body.texture = HEROES[player]
-	var c = Color.white
-	match player:
-		0:
-			c = Color(0.2, 0.2, 1.0, 0.4)
-		1:
-			c = Color(1.0, 0.2, 0.2, 0.4)
-		2:
-			c = Color(1.0, 1.0, 0.2, 0.4)
-		3:
-			c = Color(0.2, 1.0, 0.2, 0.4)
-	_underglow1.modulate = c
-	_underglow2.modulate = c
-	_underglow3.modulate = c
+	_underglow.player = player
+	_shield1.player = player
+	_shield2.player = player
 
 
 func _process(delta):
@@ -94,10 +85,29 @@ func _process(delta):
 		return
 	
 	_handle_input()
+	
+	if _spawn_frame > 0.0:
+		var circle = _collider.shape as CircleShape2D
+		circle.radius = 50
+		_shield1.visible = true
+		_shield2.visible = true
+		var a1 = _spawn_frame + (0 * 0.2)
+		while a1 > 0.4:
+			a1 -= 0.4
+		var a2 = _spawn_frame + (1 * 0.2)
+		while a2 > 0.4:
+			a2 -= 0.4
+		_shield1.size = a1
+		_shield2.size = a2
+	else:
+		var circle = _collider.shape as CircleShape2D
+		circle.radius = 20
+		_shield1.visible = false
+		_shield2.visible = false
 
 
 func _physics_process(delta):
-	if respawn_frame > 0.0:
+	if not exists or respawn_frame > 0.0:
 		return
 		
 	_shoot_and_move(delta)
@@ -127,10 +137,10 @@ func spawn_center():
 
 
 func spawn(loc: Vector2):
-	Players.set_lives(player, 1)
+	Players.set_lives(player, 5)
 	position = loc
 	exists = true
-	set_weapon(Weapon.WeaponType.MACHINE_GUN, 9000)
+	set_weapon(Weapon.WeaponType.RIFLE, 0)
 	score = 0
 
 
@@ -242,6 +252,10 @@ func _shoot_and_move(delta):
 		position.y = Map.MAP_SIZE.y - BOUNDRY_BUFFER
 	
 	_body.rotation = _angle
+	
+	for monster in _colliding:
+		if monster and monster.exists:
+			_hit_monster(monster)
 
 
 func _kill():
@@ -283,16 +297,26 @@ func _on_Hero_area_entered(area):
 		return
 		
 	var monster = area as Monster
-	if not monster or not monster.exists:
+	if not monster or not monster.exists or monster._grace > 0.0:
 		return
 	
 	if _spawn_frame > 0.0:
-		var projectile = Projectile.new()
-		projectile.position = position
-		projectile.traj = monster.position - position
-		projectile.player = player
-		monster._on_monster_hit(projectile)
+		_hit_monster(monster)
+		if monster.exists:
+			_colliding.append(monster)
 	else:
 		_kill()
-		
-		
+
+
+func _hit_monster(monster: Monster):
+	var projectile = Projectile.new()
+	projectile.position = position
+	projectile.traj = monster.position - position
+	projectile.player = player
+	monster._on_monster_hit(projectile)
+
+
+func _on_Hero_area_exited(area):
+	var monster = area as Monster
+	if monster:
+		_colliding.erase(monster)

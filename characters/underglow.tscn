@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://characters/underglow.gd" type="Script" id=1]
+[ext_resource path="res://assets/gfx/underglow.tres" type="Texture" id=2]
+
+[node name="Underglow" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Glow1" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+z_index = 2
+texture = ExtResource( 2 )
+
+[node name="Glow2" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+z_index = 2
+texture = ExtResource( 2 )
+
+[node name="Glow3" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+z_index = 2
+texture = ExtResource( 2 )

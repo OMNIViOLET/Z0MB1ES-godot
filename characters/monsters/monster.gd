@@ -32,7 +32,7 @@ var _vtarg = Vector2.ZERO
 var _frame_time = 0.0
 var _blar_frame = 0.0
 var _iangle = 0
-var _grace = 0.0
+var _grace = 2.0
 var _age = 0.0
 
 onready var _leg1 := get_node_or_null("Legs1") as Legs
@@ -50,7 +50,10 @@ func _process(delta):
 	_age += delta
 
 	if _grace > 0.0:
+		monitorable = false
 		_grace -= delta
+	else:
+		monitorable = true
 
 
 func _physics_process(delta):

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://powerups/powerup.gd" type="Script" id=1]
+[ext_resource path="res://assets/gfx/sprites.png" type="Texture" id=2]
+[ext_resource path="res://assets/sfx/fx/suit.wav" type="AudioStream" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[node name="Powerup" type="Area2D"]
+collision_layer = 8
+script = ExtResource( 1 )
+
+[node name="Sprite1" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 1152, 128, 128 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 1152, 128, 128 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[connection signal="area_entered" from="." to="." method="_on_Powerup_area_entered"]

@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://characters/hero.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/legs.tres" type="Texture" id=2]
 [ext_resource path="res://assets/gfx/hero1.tres" type="Texture" id=3]
 [ext_resource path="res://characters/legs.gd" type="Script" id=4]
 [ext_resource path="res://assets/gfx/shadow.tres" type="Texture" id=5]
-[ext_resource path="res://assets/gfx/underglow.tres" type="Texture" id=6]
+[ext_resource path="res://characters/underglow.tscn" type="PackedScene" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
@@ -20,20 +26,36 @@ scale = Vector2( 0.4, 0.4 )
 z_index = 1
 texture = ExtResource( 5 )
 
-[node name="Underglow1" type="Sprite" parent="."]
-scale = Vector2( 0.2, 0.2 )
-z_index = 2
-texture = ExtResource( 6 )
+[node name="Underglow" parent="." instance=ExtResource( 7 )]
+size = 0.2
 
-[node name="Underglow2" type="Sprite" parent="."]
-scale = Vector2( 0.24, 0.24 )
-z_index = 2
-texture = ExtResource( 6 )
+[node name="Shield1" parent="." instance=ExtResource( 7 )]
+visible = false
+z_index = 6
+size = 0.2
 
-[node name="Underglow3" type="Sprite" parent="."]
-scale = Vector2( 0.28, 0.28 )
-z_index = 2
-texture = ExtResource( 6 )
+[node name="Glow1" parent="Shield1" index="0"]
+material = SubResource( 2 )
+
+[node name="Glow2" parent="Shield1" index="1"]
+material = SubResource( 2 )
+
+[node name="Glow3" parent="Shield1" index="2"]
+material = SubResource( 2 )
+
+[node name="Shield2" parent="." instance=ExtResource( 7 )]
+visible = false
+z_index = 6
+size = 0.2
+
+[node name="Glow1" parent="Shield2" index="0"]
+material = SubResource( 3 )
+
+[node name="Glow2" parent="Shield2" index="1"]
+material = SubResource( 3 )
+
+[node name="Glow3" parent="Shield2" index="2"]
+material = SubResource( 3 )
 
 [node name="Leg1" type="Sprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
@@ -66,3 +88,7 @@ volume_db = -40.0
 bus = "Sound"
 
 [connection signal="area_entered" from="." to="." method="_on_Hero_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_Hero_area_exited"]
+
+[editable path="Shield1"]
+[editable path="Shield2"]

@@ -4,7 +4,7 @@
 
 [node name="Monster" type="Area2D" groups=["monster"]]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 script = ExtResource( 1 )
 
 [connection signal="area_entered" from="." to="." method="_on_Monster_area_entered"]
