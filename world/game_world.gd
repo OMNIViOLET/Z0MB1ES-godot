@@ -3,11 +3,12 @@ class_name GameWorld
 
 var HERO = load("res://characters/hero.tscn")
 
-onready var _camera := $Camera2D
-onready var _heroes := $Heroes
-onready var _projectiles := $Projectiles
-onready var _powerups := $Powerups
-onready var _particle_manager := $Particles
+onready var _game := $Game
+onready var _camera := $Game/Camera2D
+onready var _heroes := $Game/Heroes
+onready var _projectiles := $Game/Projectiles
+onready var _powerups := $Game/Powerups
+onready var _particle_manager := $Game/Particles
 onready var _time_manager := $Managers/TimeManager
 onready var _spawn_manager := $Managers/SpawnManager
 onready var _pause := $HUD/Pause
@@ -15,6 +16,7 @@ onready var _pause := $HUD/Pause
 
 func _ready():
 	_time_manager.connect("beat", self, "_on_beat")
+	_spawn_manager.connect("the_end_is_nigh", self, "_on_the_end")
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
 
 	for i in Players.active_players:
@@ -26,7 +28,7 @@ func _ready():
 
 
 func _process(delta):
-	_camera.position = _heroes.get_child(0).position
+	_adjust_camera(delta)
 	_check_game_over()
 	
 	if Input.is_action_just_pressed("pause") and not get_tree().paused:
@@ -71,9 +73,62 @@ func _check_game_over():
 		get_tree().change_scene("res://menu/main_menu.tscn")
 
 
+func _adjust_camera(delta: float):
+	var tl = Vector2()
+	var br = Vector2()
+	var first = true
+	var buffer = 200.0
+	for i in Players.MAX_PLAYERS:
+		var hero = get_hero(i)
+		if hero and hero.exists:
+			if first:
+				first = false
+				tl = hero.position
+				br = hero.position
+			if hero.position.x < tl.x:
+				tl.x = hero.position.x
+			if hero.position.x > br.x:
+				br.x = hero.position.x
+			if hero.position.y < tl.y:
+				tl.y = hero.position.y
+			if hero.position.y > br.y:
+				br.y = hero.position.y
+	
+	tl -= Vector2(buffer, buffer)
+	br += Vector2(buffer, buffer)
+	_camera.position = (tl + br) * 0.5
+	
+	var zoom_goal = 1.0
+	var dif = (br - tl)
+	var zoom_diff = Vector2(1280.0 / dif.x, 720.0 / dif.y)
+	if zoom_diff.x < 1.0 || zoom_diff.y < 1.0:
+		if zoom_diff.x < zoom_diff.y:
+			zoom_goal += zoom_diff.x
+		else:
+			zoom_goal += zoom_diff.y
+	
+	var zoom = (zoom_goal - _camera.zoom.x) * delta
+	_camera.zoom += Vector2(zoom, zoom)
+	if _camera.zoom.x > Map.MAP_SCALE:
+		_camera.zoom = Vector2(Map.MAP_SCALE, Map.MAP_SCALE)
+	if _camera.zoom.x < 1.0:
+		_camera.zoom = Vector2(1.0, 1.0)
+
+
 func _on_beat(phase: int, beat: int):
-	_spawn_manager.do_click(phase, beat)
+	#_spawn_manager.do_click(phase, beat)
+	pass
 
 
 func _on_joy_connection_changed(device: int, connected: bool):
 	print("joy ", device, " ", "connected" if connected else "disconnected")
+
+
+func _on_the_end():
+	_game.visible = false
+	for i in Players.MAX_PLAYERS:
+		var hero = get_hero(i)
+		if hero and hero.exists:
+			Players.add_points(i, Players.get_lives(i) * 10000)
+			Players.set_lives(i, 1)
+			hero._kill()

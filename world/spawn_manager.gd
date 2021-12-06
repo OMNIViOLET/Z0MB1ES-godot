@@ -281,6 +281,7 @@ func _make_goodies(count: int):
 
 
 func _get_adjusted_count(count: int) -> int:
+	print("want to spawn: ", count)
 	var c = 0
 	for i in Players.MAX_PLAYERS:
 		var hero = _world.get_hero(i)

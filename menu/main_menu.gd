@@ -95,3 +95,7 @@ func _input(event):
 			
 		if slot == Players.DEVICE_NOT_ASSIGNED:
 			get_tree().change_scene("res://menu/quit.tscn")
+	elif Input.is_action_just_pressed("scores"):
+		get_tree().change_scene("res://menu/high_scores_menu.tscn")
+	elif Input.is_action_just_pressed("settings"):
+		get_tree().change_scene("res://menu/settings_menu.tscn")

@@ -62,7 +62,7 @@ func set_score(score: int):
 	while t > 0:
 		_text = _text.insert(0, str(t % 10))
 		t /= 10
-	text = _text
+	self.text = _text
 
 
 func _set_text(value: String):

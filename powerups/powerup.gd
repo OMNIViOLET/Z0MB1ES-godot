@@ -13,6 +13,8 @@ enum PowerupType {
 	FUN_SHIELD
 }
 
+var FX = load("res://assets/sfx/fx/suit.wav")
+
 var powerup_type = PowerupType.WEAPON_MACHINE_GUN setget _set_powerup_type, _get_powerup_type
 var lifetime = 20.0
 var speed = 100.0
@@ -22,7 +24,6 @@ var pulse = 0.0
 
 onready var _sprite1 := $Sprite1
 onready var _sprite2 := $Sprite2
-onready var _sfx := $SFX
 
 
 func _process(delta):
@@ -72,6 +73,7 @@ func _on_Powerup_area_entered(area):
 	if not exists or not hero or not hero.exists:
 		return
 	
+	SoundBank.play(FX, -13.0)
 	exists = false
 	match powerup_type:
 		PowerupType.FUN_SHIELD:

@@ -1,7 +1,5 @@
 extends Node
 
-var MAX_SOUNDS = 18
-
 var EXPLODE_FX = load("res://assets/sfx/fx/explode.wav")
 
 
@@ -22,11 +20,7 @@ func explode():
 	play(EXPLODE_FX, -18.0)
 
 
-func play(stream, db: float):
-	var sounds = get_child_count()
-	if sounds >= MAX_SOUNDS:
-		return
-		
+func play(stream, db: float):	
 	var player = AudioStreamPlayer.new()
 	player.bus = "Sound"
 	player.stream = stream

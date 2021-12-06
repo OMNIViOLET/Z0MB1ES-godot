@@ -2,7 +2,7 @@ extends Node2D
 class_name Underglow
 
 export(float) var size = 1.0
-export(int) var player = 0
+export(int) var player = 0 setget _set_player, _get_player
 
 onready var _glow1 := $Glow1
 onready var _glow2 := $Glow2
@@ -10,6 +10,19 @@ onready var _glow3 := $Glow3
 
 
 func _ready():
+	_set_player_color()
+
+
+func _set_player(value: int):
+	player = value
+	_set_player_color()
+
+
+func _get_player() -> int:
+	return player
+
+
+func _set_player_color():
 	var c = Color.white
 	match player:
 		0:

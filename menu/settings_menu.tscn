@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://text/dynamic_text.gd" type="Script" id=1]
+[ext_resource path="res://menu/settings_menu.gd" type="Script" id=2]
+
+[node name="SettingsMenu" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Title" type="Node2D" parent="."]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+position = Vector2( 640, 150 )
+script = ExtResource( 1 )
+text = "SETTINGS"
+size = 11.0
+justify = 2
+
+[node name="Ok" type="Node2D" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 640, 620 )
+script = ExtResource( 1 )
+text = "(A) ok"
+size = 6.0
+justify = 2
+
+[node name="Master" type="Node2D" parent="."]
+position = Vector2( 360, 230 )
+script = ExtResource( 1 )
+text = "Master"
+size = 8.0
+
+[node name="MasterVolume" type="Node2D" parent="."]
+position = Vector2( 920, 230 )
+script = ExtResource( 1 )
+text = "100"
+size = 8.0
+justify = 1
+
+[node name="Music" type="Node2D" parent="."]
+position = Vector2( 360, 300 )
+script = ExtResource( 1 )
+text = "Music"
+size = 8.0
+
+[node name="MusicVolume" type="Node2D" parent="."]
+position = Vector2( 920, 300 )
+script = ExtResource( 1 )
+text = "100"
+size = 8.0
+justify = 1
+
+[node name="Sound" type="Node2D" parent="."]
+position = Vector2( 360, 370 )
+script = ExtResource( 1 )
+text = "Sound"
+size = 8.0
+
+[node name="SoundVolume" type="Node2D" parent="."]
+position = Vector2( 920, 370 )
+script = ExtResource( 1 )
+text = "100"
+size = 8.0
+justify = 1
+
+[node name="Fullscreen" type="Node2D" parent="."]
+position = Vector2( 360, 440 )
+script = ExtResource( 1 )
+text = "Fullscreen"
+size = 8.0
+
+[node name="FullscreenOpt" type="Node2D" parent="."]
+position = Vector2( 920, 440 )
+script = ExtResource( 1 )
+text = "On"
+size = 8.0
+justify = 1

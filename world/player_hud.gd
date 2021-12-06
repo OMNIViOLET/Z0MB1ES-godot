@@ -25,7 +25,9 @@ func _process(delta):
 
 func _update_hud():
 	_name.text = Players.get_player_info(slot).player_name
+	_name.modulate = Players.get_player_info(slot).color
 	_lives.text = "x%d" % Players.get_lives(slot)
+	_lives.modulate = Players.get_player_info(slot).color
 	_score.text = str(Players.get_points(slot))
 	_weapon.visible = false
 	_ammo.visible = false
@@ -61,8 +63,8 @@ func _update_hud():
 				if Input.is_action_just_pressed("ui_accept"):
 					hero.name_in += 1
 					if hero.name_in == 4:
-						#TODO: Highscores
-						pass
+						var player_name = hero.initials[0] + hero.initials[1] + hero.initials[2]
+						HighScores.add_score(player_name, Players.get_points(hero.player))
 					else:
 						hero.initials[hero.name_in - 1] = 'A'
 				if Input.is_action_just_pressed("ui_cancel"):

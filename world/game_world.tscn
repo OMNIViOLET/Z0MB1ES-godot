@@ -25,60 +25,66 @@ time_manager_path = NodePath("../TimeManager")
 
 [node name="SpawnManager" type="Node" parent="Managers"]
 script = ExtResource( 7 )
-monster_container_path = NodePath("../../Monsters")
-powerups_container_path = NodePath("../../Powerups")
+monster_container_path = NodePath("../../Game/Monsters")
+powerups_container_path = NodePath("../../Game/Powerups")
 world_path = NodePath("../..")
 
-[node name="Map" parent="." instance=ExtResource( 4 )]
-time_manager_path = NodePath("../Managers/TimeManager")
+[node name="Game" type="Node2D" parent="."]
 
-[node name="Projectiles" type="Node2D" parent="."]
+[node name="Map" parent="Game" instance=ExtResource( 4 )]
+time_manager_path = NodePath("../../Managers/TimeManager")
 
-[node name="Particles" parent="." instance=ExtResource( 6 )]
+[node name="Projectiles" type="Node2D" parent="Game"]
 
-[node name="Powerups" type="Node2D" parent="."]
+[node name="Particles" parent="Game" instance=ExtResource( 6 )]
 
-[node name="Heroes" type="Node2D" parent="."]
+[node name="Powerups" type="Node2D" parent="Game"]
 
-[node name="Monsters" type="Node2D" parent="."]
+[node name="Heroes" type="Node2D" parent="Game"]
 
-[node name="MapOverlay" parent="." instance=ExtResource( 5 )]
+[node name="Monsters" type="Node2D" parent="Game"]
+
+[node name="MapOverlay" parent="Game" instance=ExtResource( 5 )]
 material = null
 z_index = 10
 map_path = NodePath("../Map")
-time_manager_path = NodePath("../Managers/TimeManager")
+time_manager_path = NodePath("../../Managers/TimeManager")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Game"]
+position = Vector2( 640, 360 )
 current = true
+process_mode = 0
 limit_left = 0
 limit_top = 0
 limit_right = 2048
 limit_bottom = 1152
 smoothing_enabled = true
-editor_draw_drag_margin = true
+smoothing_speed = 3.0
+editor_draw_limits = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="PlayerHUD" type="Node2D" parent="HUD"]
+modulate = Color( 1, 1, 1, 0.8 )
 
 [node name="Player1" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 256, 0 )
-heroes_path = NodePath("../../../Heroes")
+heroes_path = NodePath("../../../Game/Heroes")
 
 [node name="Player2" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 512, 0 )
-heroes_path = NodePath("../../../Heroes")
 slot = 1
+heroes_path = NodePath("../../../Game/Heroes")
 
 [node name="Player3" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 768, 0 )
-heroes_path = NodePath("../../../Heroes")
 slot = 2
+heroes_path = NodePath("../../../Game/Heroes")
 
 [node name="Player4" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 1024, 0 )
-heroes_path = NodePath("../../../Heroes")
 slot = 3
+heroes_path = NodePath("../../../Game/Heroes")
 
 [node name="FPS" type="Node2D" parent="HUD/PlayerHUD"]
 position = Vector2( 50, 50 )
