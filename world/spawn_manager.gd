@@ -83,8 +83,7 @@ func do_click(phase: int, beats: int):
 					_pop(Monster.MonsterType.FATTY, 1)
 				_:
 					if beats >= 192 and beats <= 223:
-						_pop(Monster.MonsterType.ZOMBIE, 16)
-						_pop(Monster.MonsterType.FATTY, 1)
+						_pop(Monster.MonsterType.ZOMBIE, 3)
 		TimeManager.Phase.SKA:
 			match beats:
 				0:
@@ -281,7 +280,6 @@ func _make_goodies(count: int):
 
 
 func _get_adjusted_count(count: int) -> int:
-	print("want to spawn: ", count)
 	var c = 0
 	for i in Players.MAX_PLAYERS:
 		var hero = _world.get_hero(i)
@@ -342,9 +340,8 @@ func _make_monster(loc: Vector2, monster_type: int, midspawn: bool = false):
 				monsters[i] = null
 				continue
 			if m and (not m.exists or m.hp < 0.0):
-				m.queue_free()
-				monsters[i] = monster
-				return
+				oldest = i
+				break
 			elif not m or m._age > oldval:
 				oldest = i
 				if m:

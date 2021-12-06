@@ -100,14 +100,17 @@ func _adjust_camera(delta: float):
 	
 	var zoom_goal = 1.0
 	var dif = (br - tl)
-	var zoom_diff = Vector2(1280.0 / dif.x, 720.0 / dif.y)
-	if zoom_diff.x < 1.0 || zoom_diff.y < 1.0:
-		if zoom_diff.x < zoom_diff.y:
-			zoom_goal += zoom_diff.x
-		else:
-			zoom_goal += zoom_diff.y
+	var max_area = Vector2(Map.MAP_SIZE.x, Map.MAP_SIZE.y)
 	
-	var zoom = (zoom_goal - _camera.zoom.x) * delta
+	var zoom_diff = dif / max_area
+	if zoom_diff.x > zoom_diff.y:
+		zoom_goal = zoom_diff.x * Map.MAP_SCALE
+	else:
+		zoom_goal = zoom_diff.y * Map.MAP_SCALE
+
+	zoom_goal = max(1.0, zoom_goal)
+	
+	var zoom = (zoom_goal - _camera.zoom.x) * delta * 3.0
 	_camera.zoom += Vector2(zoom, zoom)
 	if _camera.zoom.x > Map.MAP_SCALE:
 		_camera.zoom = Vector2(Map.MAP_SCALE, Map.MAP_SCALE)
@@ -116,8 +119,7 @@ func _adjust_camera(delta: float):
 
 
 func _on_beat(phase: int, beat: int):
-	#_spawn_manager.do_click(phase, beat)
-	pass
+	_spawn_manager.do_click(phase, beat)
 
 
 func _on_joy_connection_changed(device: int, connected: bool):

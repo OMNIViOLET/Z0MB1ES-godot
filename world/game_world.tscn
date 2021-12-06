@@ -53,7 +53,6 @@ time_manager_path = NodePath("../../Managers/TimeManager")
 [node name="Camera2D" type="Camera2D" parent="Game"]
 position = Vector2( 640, 360 )
 current = true
-process_mode = 0
 limit_left = 0
 limit_top = 0
 limit_right = 2048
@@ -87,6 +86,7 @@ slot = 3
 heroes_path = NodePath("../../../Game/Heroes")
 
 [node name="FPS" type="Node2D" parent="HUD/PlayerHUD"]
+visible = false
 position = Vector2( 50, 50 )
 script = ExtResource( 10 )
 text = "60"

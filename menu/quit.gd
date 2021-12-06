@@ -25,6 +25,15 @@ func _process(_delta):
 			_ok.text = "(enter) ok"
 			_cancel.text = "(esc) cancel"
 
+
+func _input(event):
+	var device_type = PlayerInfo.DeviceType.JOYPAD
+	if event is InputEventKey:
+		device_type = PlayerInfo.DeviceType.KEYBOARD
+		_primary_device_type = device_type
+	elif event.device == 0:
+		_primary_device_type = device_type
+
 	if Input.is_action_just_pressed("ui_down"):
 		_selected += 1
 		if _selected >= _options.size():
@@ -41,13 +50,3 @@ func _process(_delta):
 				get_tree().change_scene("res://menu/main_menu.tscn")
 	elif Input.is_action_just_pressed("cancel"):
 		get_tree().change_scene("res://menu/main_menu.tscn")
-
-
-func _input(event):
-	var device_type = PlayerInfo.DeviceType.JOYPAD
-	if event is InputEventKey:
-		device_type = PlayerInfo.DeviceType.KEYBOARD
-		_primary_device_type = device_type
-	elif event.device == 0:
-		_primary_device_type = device_type
-

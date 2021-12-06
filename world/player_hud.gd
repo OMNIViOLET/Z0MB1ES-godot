@@ -23,6 +23,48 @@ func _process(delta):
 	_update_hud()
 
 
+func _input(event):
+	var player_device_id = Players.get_slot_device(slot)
+	var keyboard = Players.get_slot_device_type(slot) == PlayerInfo.DeviceType.KEYBOARD
+	if event.device != player_device_id or (keyboard and not event is InputEventKey):
+		return
+
+	var hero = _get_hero()
+	if not hero:
+		return
+		
+	if hero.name_in > 0:
+		if hero.name_in < 4:
+			if Input.is_action_just_pressed("ui_up"):
+				var o = ord(hero.initials[hero.name_in - 1])
+				o += 1
+				if o > 90:
+					o = 65
+				hero.initials[hero.name_in - 1] = char(o)
+			if Input.is_action_just_pressed("ui_down"):
+				var o = ord(hero.initials[hero.name_in - 1])
+				o -= 1
+				if o < 65:
+					o = 90
+				hero.initials[hero.name_in - 1] = char(o)
+			if hero.name_in == 1:
+				hero.initials[1] = '-'
+				hero.initials[2] = '-'
+			elif hero.name_in == 2:
+				hero.initials[2] = '-'
+			
+			if Input.is_action_just_pressed("ui_accept"):
+				hero.name_in += 1
+				if hero.name_in == 4:
+					var player_name = hero.initials[0] + hero.initials[1] + hero.initials[2]
+					HighScores.add_score(player_name, Players.get_points(hero.player))
+				else:
+					hero.initials[hero.name_in - 1] = 'A'
+			if Input.is_action_just_pressed("ui_cancel"):
+				if hero.name_in > 1:
+					hero.name_in -= 1
+
+
 func _update_hud():
 	_name.text = Players.get_player_info(slot).player_name
 	_name.modulate = Players.get_player_info(slot).color
@@ -39,37 +81,6 @@ func _update_hud():
 			_ammo.text = str(hero._ammo)
 			_weapon.visible = true
 			_ammo.visible = true
-		
-		if hero.name_in > 0:
-			if hero.name_in < 4:
-				if Input.is_action_just_pressed("ui_up"):
-					var o = ord(hero.initials[hero.name_in - 1])
-					o += 1
-					if o > 90:
-						o = 65
-					hero.initials[hero.name_in - 1] = char(o)
-				if Input.is_action_just_pressed("ui_down"):
-					var o = ord(hero.initials[hero.name_in - 1])
-					o -= 1
-					if o < 65:
-						o = 90
-					hero.initials[hero.name_in - 1] = char(o)
-				if hero.name_in == 1:
-					hero.initials[1] = '-'
-					hero.initials[2] = '-'
-				elif hero.name_in == 2:
-					hero.initials[2] = '-'
-				
-				if Input.is_action_just_pressed("ui_accept"):
-					hero.name_in += 1
-					if hero.name_in == 4:
-						var player_name = hero.initials[0] + hero.initials[1] + hero.initials[2]
-						HighScores.add_score(player_name, Players.get_points(hero.player))
-					else:
-						hero.initials[hero.name_in - 1] = 'A'
-				if Input.is_action_just_pressed("ui_cancel"):
-					if hero.name_in > 1:
-						hero.name_in -= 1
 
 
 func _get_hero() -> Hero:

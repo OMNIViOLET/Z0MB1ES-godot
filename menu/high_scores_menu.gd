@@ -10,6 +10,9 @@ func _ready():
 	var size = 6.0
 	
 	for i in HighScores.MAX_SCORES:
+		if HighScores.high_scores[i].score <= 0:
+			continue
+			
 		# Rank
 		var text = DynamicText.new()
 		text._create_text_shapes()
