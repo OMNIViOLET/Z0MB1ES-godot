@@ -84,7 +84,6 @@ region_rect = Rect2( 0, 0, 256, 128 )
 shape = SubResource( 1 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
-volume_db = -40.0
 bus = "Sound"
 
 [connection signal="area_entered" from="." to="." method="_on_Hero_area_entered"]

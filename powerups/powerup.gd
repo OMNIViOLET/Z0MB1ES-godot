@@ -13,7 +13,7 @@ enum PowerupType {
 	FUN_SHIELD
 }
 
-var powerup_type = PowerupType.WEAPON_MACHINE_GUN
+var powerup_type = PowerupType.WEAPON_MACHINE_GUN setget _set_powerup_type, _get_powerup_type
 var lifetime = 20.0
 var speed = 100.0
 var buf = 150.0
@@ -54,6 +54,17 @@ func _process(delta):
 	if lifetime <= 0.0:
 		exists = false
 		queue_free()
+
+
+func _set_powerup_type(type: int):
+	powerup_type = type
+	if type == PowerupType.HELP_LIFE:
+		if Rand.coin_toss(0.7):
+			powerup_type = randi() % 9
+
+
+func _get_powerup_type() -> int:
+	return powerup_type
 
 
 func _on_Powerup_area_entered(area):

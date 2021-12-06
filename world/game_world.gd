@@ -27,6 +27,7 @@ func _ready():
 
 func _process(delta):
 	_camera.position = _heroes.get_child(0).position
+	_check_game_over()
 
 
 func make_goodie(loc: Vector2):
@@ -77,8 +78,24 @@ func add_projectile(projectile: Projectile):
 	_projectiles.add_child(projectile)
 
 
+func _check_game_over():
+	var all_done = true
+	for i in Players.MAX_PLAYERS:
+		var hero = get_hero(i)
+		if not hero:
+			continue
+		if hero.exists:
+			all_done = false
+	
+	if all_done:
+		for i in Players.MAX_PLAYERS:
+			Players.set_slot_state(i, PlayerInfo.PlayerState.OUT)
+		get_tree().change_scene("res://menu/main_menu.tscn")
+
+
 func _on_beat(phase: int, beat: int):
-	_spawn_manager.do_click(phase, beat)
+	pass
+	#_spawn_manager.do_click(phase, beat)
 
 
 func _on_joy_connection_changed(device: int, connected: bool):

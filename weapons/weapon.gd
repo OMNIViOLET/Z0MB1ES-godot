@@ -19,6 +19,7 @@ var SHOT = load("res://weapons/projectiles/shot.tscn")
 
 export(WeaponType) var weapon_type = WeaponType.RIFLE
 export(Resource) var sound_effect
+export(float, -80.0, 24.0) var volume_db = 0
 export(float, 0.0, 1.0) var shoot_frame_time = 0.0
 
 

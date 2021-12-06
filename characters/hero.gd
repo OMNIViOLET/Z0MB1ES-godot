@@ -140,7 +140,7 @@ func spawn(loc: Vector2):
 	Players.set_lives(player, 5)
 	position = loc
 	exists = true
-	set_weapon(Weapon.WeaponType.RIFLE, 0)
+	set_weapon(Weapon.WeaponType.SHOTTY, 999)
 	score = 0
 
 
@@ -218,6 +218,7 @@ func _shoot_and_move(delta):
 			
 			var weapon_def = WEAPONS[_weapon] as Weapon
 			_shoot_frame = weapon_def.shoot_frame_time
+			_sfx.volume_db = weapon_def.volume_db
 			_sfx.stream = weapon_def.sound_effect
 			_sfx.play()
 			

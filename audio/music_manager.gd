@@ -15,8 +15,7 @@ func _ready():
 
 func _process(delta):
 	if not _audio_player.playing:
-		if _time_manager.can_start_playing():
-			start()
+		start()
 
 
 func start():

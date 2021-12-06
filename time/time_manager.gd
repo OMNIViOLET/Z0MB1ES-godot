@@ -36,7 +36,6 @@ var _quadbeat = 0
 var _octobeat = 0
 var _track_time = 0.0
 var _track_left = 0.0
-var _play_num = 0
 var _offset = 0.0
 
 onready var _music_manager := get_node(music_manager_path)
@@ -115,10 +114,6 @@ func get_track_time() -> float:
 	return _track_time
 
 
-func can_start_playing() -> bool:
-	return _play_num == 0
-
-
 func start():
 	_beat = -1
 	_phase = Phase.INTRO_THEME
@@ -127,7 +122,6 @@ func start():
 	_start_time = OS.get_ticks_msec()
 	_time = 0.0
 	_play_mode = PlayMode.PLAYING
-	_play_num += 1
 
 
 func pause():

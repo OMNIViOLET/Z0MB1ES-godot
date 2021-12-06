@@ -123,6 +123,10 @@ func get_slot_state(slot: int) -> int:
 	return players[slot].player_state
 
 
+func set_slot_state(slot: int, state: int):
+	get_player_info(slot).player_state = state
+
+
 func all_slots_ready() -> bool:
 	var any_ready = false
 	var all_ready = true
