@@ -1,8 +1,6 @@
 extends Monster
 class_name Bomber
 
-onready var _explode := $ExplodeFX
-
 
 func _process(delta):
 	_body.scale = Vector2.ONE * 0.35 * (((0.5 - spawn_frame) * 2.0) if spawn_frame > 0.0 else 1.0)
@@ -27,7 +25,7 @@ func _on_monster_hit(projectile: Projectile):
 				rand_range(1.3, 2.0),
 				0
 			)
-		_explode.play()
+		SoundBank.explode()
 		_add_points(projectile.player, 500)
 		exists = false
 		if Rand.coin_toss(0.1):

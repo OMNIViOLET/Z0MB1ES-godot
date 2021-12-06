@@ -13,6 +13,9 @@ onready var _options = [
 
 
 func _process(_delta):
+	if not visible:
+		return
+
 	for i in _options.size():
 		_options[i].modulate = Color.white
 		_options[i].flashing = i == _selected
@@ -27,6 +30,9 @@ func _process(_delta):
 
 
 func _input(event):
+	if not visible:
+		return
+		
 	var device_type = PlayerInfo.DeviceType.JOYPAD
 	if event is InputEventKey:
 		device_type = PlayerInfo.DeviceType.KEYBOARD

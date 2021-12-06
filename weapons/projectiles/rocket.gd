@@ -1,8 +1,6 @@
 extends Projectile
 class_name Rocket
 
-onready var _explode := $ExplodeFX
-
 
 func _process(delta):
 	if world:
@@ -35,7 +33,7 @@ func explode():
 			rand_range(1.3, 2.0),
 			0
 		)
-	_explode.play()
+	SoundBank.explode()
 	
 	var monsters = get_tree().get_nodes_in_group("monster")
 	for monster in monsters:

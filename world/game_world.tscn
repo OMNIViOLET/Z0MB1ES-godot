@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://time/time_manager.gd" type="Script" id=1]
 [ext_resource path="res://world/game_world.gd" type="Script" id=2]
@@ -10,9 +10,6 @@
 [ext_resource path="res://world/pause.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world/fps.gd" type="Script" id=10]
 [ext_resource path="res://world/player_hud.tscn" type="PackedScene" id=12]
-
-[sub_resource type="CanvasItemMaterial" id=1]
-blend_mode = 1
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 2 )
@@ -37,17 +34,13 @@ time_manager_path = NodePath("../Managers/TimeManager")
 
 [node name="Projectiles" type="Node2D" parent="."]
 
-[node name="AlphaParticleManager" parent="." instance=ExtResource( 6 )]
+[node name="Particles" parent="." instance=ExtResource( 6 )]
 
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="Heroes" type="Node2D" parent="."]
 
 [node name="Monsters" type="Node2D" parent="."]
-
-[node name="AdditiveParticleManager" parent="." instance=ExtResource( 6 )]
-material = SubResource( 1 )
-z_index = 6
 
 [node name="MapOverlay" parent="." instance=ExtResource( 5 )]
 material = null
@@ -74,18 +67,18 @@ heroes_path = NodePath("../../../Heroes")
 
 [node name="Player2" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 512, 0 )
-slot = 1
 heroes_path = NodePath("../../../Heroes")
+slot = 1
 
 [node name="Player3" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 768, 0 )
-slot = 2
 heroes_path = NodePath("../../../Heroes")
+slot = 2
 
 [node name="Player4" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 1024, 0 )
-slot = 3
 heroes_path = NodePath("../../../Heroes")
+slot = 3
 
 [node name="FPS" type="Node2D" parent="HUD/PlayerHUD"]
 position = Vector2( 50, 50 )

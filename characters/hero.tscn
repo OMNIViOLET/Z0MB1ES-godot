@@ -83,9 +83,6 @@ region_rect = Rect2( 0, 0, 256, 128 )
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-bus = "Sound"
-
 [connection signal="area_entered" from="." to="." method="_on_Hero_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Hero_area_exited"]
 

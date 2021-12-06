@@ -7,8 +7,7 @@ onready var _camera := $Camera2D
 onready var _heroes := $Heroes
 onready var _projectiles := $Projectiles
 onready var _powerups := $Powerups
-onready var _alpha_particle_manager := $AlphaParticleManager
-onready var _additive_particle_manager := $AdditiveParticleManager
+onready var _particle_manager := $Particles
 onready var _time_manager := $Managers/TimeManager
 onready var _spawn_manager := $Managers/SpawnManager
 onready var _pause := $HUD/Pause
@@ -51,31 +50,7 @@ func get_hero(player: int) -> Hero:
 
 
 func add_particle(particle_type: int, loc: Vector2, traj: Vector2, player: int, size: float, flags: int):
-	match particle_type:
-		ParticleCatalog.ParticleType.BLOOD:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.DYING:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.EXPLODE:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.FACE_DIE:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.FACE_TRAIL:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.GEOBIT:
-			_additive_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.GOO:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.MUZZLE_FLASH:
-			_additive_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.NEUCHUNK:
-			_additive_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.PIXEL:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.POWERUP:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
-		ParticleCatalog.ParticleType.SCORE:
-			_alpha_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
+	_particle_manager.add_particle(particle_type, loc, traj, player, size, flags)
 
 
 func add_projectile(projectile: Projectile):
@@ -97,8 +72,7 @@ func _check_game_over():
 
 
 func _on_beat(phase: int, beat: int):
-	pass
-	#_spawn_manager.do_click(phase, beat)
+	_spawn_manager.do_click(phase, beat)
 
 
 func _on_joy_connection_changed(device: int, connected: bool):

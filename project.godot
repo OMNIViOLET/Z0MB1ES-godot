@@ -395,6 +395,7 @@ config/icon="res://icon.png"
 
 Rand="*res://util/rand.gd"
 Events="*res://util/events.gd"
+SoundBank="*res://audio/sound_bank.gd"
 Players="*res://players/players.gd"
 
 [display]

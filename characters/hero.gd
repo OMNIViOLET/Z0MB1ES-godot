@@ -47,7 +47,6 @@ onready var _leg1 := $Leg1
 onready var _leg2 := $Leg2
 onready var _collider := $Collider
 onready var _underglow := $Underglow
-onready var _sfx := $SFX
 onready var _shield1 := $Shield1
 onready var _shield2 := $Shield1
 
@@ -61,8 +60,6 @@ func _ready():
 	_underglow.player = player
 	_shield1.player = player
 	_shield2.player = player
-	
-	Events.connect("quitting", self, "_on_quitting")
 
 
 func _process(delta):
@@ -142,7 +139,7 @@ func spawn(loc: Vector2):
 	Players.set_lives(player, 5)
 	position = loc
 	exists = true
-	set_weapon(Weapon.WeaponType.SHOTTY, 999)
+	set_weapon(Weapon.WeaponType.RIFLE, 0)
 	score = 0
 
 
@@ -220,10 +217,8 @@ func _shoot_and_move(delta):
 			
 			var weapon_def = WEAPONS[_weapon] as Weapon
 			_shoot_frame = weapon_def.shoot_frame_time
-			_sfx.volume_db = weapon_def.volume_db
-			_sfx.stream = weapon_def.sound_effect
-			_sfx.play()
 			
+			SoundBank.play(weapon_def.sound_effect, weapon_def.volume_db)		
 			weapon_def.fire(world, player, position, _angle)
 			
 			if _weapon != Weapon.WeaponType.RIFLE:
@@ -323,7 +318,3 @@ func _on_Hero_area_exited(area):
 	var monster = area as Monster
 	if monster:
 		_colliding.erase(monster)
-
-
-func _on_quitting():
-	_sfx.stop()
