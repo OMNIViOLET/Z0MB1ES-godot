@@ -58,7 +58,7 @@ func _input(event):
 	if event is InputEventKey:
 		device_type = PlayerInfo.DeviceType.KEYBOARD
 		_primary_device_type = device_type
-	elif event.device == 0:
+	elif event.device == 0 and (not event is InputEventJoypadMotion or event.axis_value > 0.9):
 		_primary_device_type = device_type
 
 	if Input.is_action_just_pressed("ui_down"):

@@ -65,12 +65,13 @@ func _input(event):
 	var device_type = PlayerInfo.DeviceType.JOYPAD
 	if event is InputEventKey:
 		device_type = PlayerInfo.DeviceType.KEYBOARD
+		_primary_device_type = device_type
+	elif event.device == 0 and (not event is InputEventJoypadMotion or event.axis_value > 0.9):
+		_primary_device_type = device_type
+
 	var slot = Players.get_device_slot(event.device, device_type)
 
 	if Input.is_action_just_pressed("player_ready"):
-		if event.device == 0:
-			_primary_device_type = device_type
-
 		_device_grace[event.device] = true
 		if slot == Players.DEVICE_NOT_ASSIGNED:
 			slot = Players.get_available_slot()
@@ -80,19 +81,13 @@ func _input(event):
 		Players.ready_slot(slot)
 		Players.set_slot_device(slot, event.device, device_type)
 	elif Input.is_action_just_pressed("player_cancel"):
-		if event.device == 0:
-			_primary_device_type = device_type
-
 		_device_grace[event.device] = true
 		if slot == Players.DEVICE_NOT_ASSIGNED or Players.get_slot_state(slot) == PlayerInfo.PlayerState.OUT:
 			if event.device == 0:
 				get_tree().change_scene("res://menu/quit.tscn")
 			return
 		Players.unready_slot(slot)
-	elif Input.is_action_just_pressed("cancel"):
-		if event.device == 0:
-			_primary_device_type = device_type
-			
+	elif Input.is_action_just_pressed("cancel"):	
 		if slot == Players.DEVICE_NOT_ASSIGNED or Players.get_slot_state(slot) == PlayerInfo.PlayerState.OUT:
 			get_tree().change_scene("res://menu/quit.tscn")
 	elif Input.is_action_just_pressed("scores"):

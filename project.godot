@@ -399,8 +399,10 @@ _global_script_class_icons={
 [application]
 
 config/name="I MAED A GAM3 W1TH Z0MBIES 1N IT!!! 1"
+config/description="Godot port of the Ska Studios XBLIG classic I MAED A GAM3 W1TH Z0MBIES 1N IT!!! 1"
 run/main_scene="res://menu/main_menu.tscn"
 boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
+config/icon="res://icon.png"
 
 [autoload]
 
