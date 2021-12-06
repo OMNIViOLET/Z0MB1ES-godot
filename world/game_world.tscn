@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://time/time_manager.gd" type="Script" id=1]
 [ext_resource path="res://world/game_world.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://map/map_overlay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://particles/particle_manager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world/spawn_manager.gd" type="Script" id=7]
+[ext_resource path="res://world/pause.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world/fps.gd" type="Script" id=10]
 [ext_resource path="res://world/player_hud.tscn" type="PackedScene" id=12]
 
@@ -65,25 +66,34 @@ editor_draw_drag_margin = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Player1" parent="HUD" instance=ExtResource( 12 )]
-position = Vector2( 256, 0 )
+[node name="PlayerHUD" type="Node2D" parent="HUD"]
 
-[node name="Player2" parent="HUD" instance=ExtResource( 12 )]
+[node name="Player1" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
+position = Vector2( 256, 0 )
+heroes_path = NodePath("../../../Heroes")
+
+[node name="Player2" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 512, 0 )
 slot = 1
+heroes_path = NodePath("../../../Heroes")
 
-[node name="Player3" parent="HUD" instance=ExtResource( 12 )]
+[node name="Player3" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 768, 0 )
 slot = 2
+heroes_path = NodePath("../../../Heroes")
 
-[node name="Player4" parent="HUD" instance=ExtResource( 12 )]
+[node name="Player4" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
 position = Vector2( 1024, 0 )
 slot = 3
+heroes_path = NodePath("../../../Heroes")
 
-[node name="FPS" type="Node2D" parent="HUD"]
+[node name="FPS" type="Node2D" parent="HUD/PlayerHUD"]
 position = Vector2( 50, 50 )
 script = ExtResource( 10 )
 text = "60"
 size = 3.0
 justify = 2
 flashing = true
+
+[node name="Pause" parent="HUD" instance=ExtResource( 8 )]
+visible = false

@@ -11,6 +11,7 @@ onready var _alpha_particle_manager := $AlphaParticleManager
 onready var _additive_particle_manager := $AdditiveParticleManager
 onready var _time_manager := $Managers/TimeManager
 onready var _spawn_manager := $Managers/SpawnManager
+onready var _pause := $HUD/Pause
 
 
 func _ready():
@@ -28,6 +29,9 @@ func _ready():
 func _process(delta):
 	_camera.position = _heroes.get_child(0).position
 	_check_game_over()
+	
+	if Input.is_action_just_pressed("pause") and not get_tree().paused:
+		_pause.show_pause()
 
 
 func make_goodie(loc: Vector2):
@@ -88,8 +92,7 @@ func _check_game_over():
 			all_done = false
 	
 	if all_done:
-		for i in Players.MAX_PLAYERS:
-			Players.set_slot_state(i, PlayerInfo.PlayerState.OUT)
+		Players.reset_players()
 		get_tree().change_scene("res://menu/main_menu.tscn")
 
 

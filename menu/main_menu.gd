@@ -84,7 +84,7 @@ func _input(event):
 			_primary_device_type = device_type
 
 		_device_grace[event.device] = true
-		if slot == Players.DEVICE_NOT_ASSIGNED:
+		if slot == Players.DEVICE_NOT_ASSIGNED or Players.get_slot_state(slot) == PlayerInfo.PlayerState.OUT:
 			if event.device == 0:
 				get_tree().change_scene("res://menu/quit.tscn")
 			return

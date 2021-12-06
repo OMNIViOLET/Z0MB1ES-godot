@@ -10,6 +10,7 @@ onready var _time_manager := get_node(time_manager_path)
 
 
 func _ready():
+	Events.connect("quitting", self, "_on_quitting")
 	_audio_player.stream = EPIC_OPUS
 
 
@@ -42,3 +43,6 @@ func resume():
 	if _audio_player.stream_paused:
 		_audio_player.stream_paused = false
 
+
+func _on_quitting():
+	stop()

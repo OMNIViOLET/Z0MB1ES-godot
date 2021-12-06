@@ -17,11 +17,11 @@ var players = [
 
 
 func _init():
+	_init_players()
 	reset_players()
 
 
-func reset_players():
-	active_players = 0
+func _init_players():
 	players[0].player_name = "Player 1"
 	players[0].color = Color(0.5, 0.5, 1.0)
 	players[1].player_name = "Player 2"
@@ -30,6 +30,12 @@ func reset_players():
 	players[2].color = Color(1.0, 1.0, 0.5)
 	players[3].player_name = "Player 4"
 	players[3].color = Color(0.5, 1.0, 0.5)
+
+
+func reset_players():
+	active_players = 0
+	for i in MAX_PLAYERS:
+		set_slot_state(i, PlayerInfo.PlayerState.OUT)
 	_on_slots_updated()
 
 

@@ -61,6 +61,8 @@ func _ready():
 	_underglow.player = player
 	_shield1.player = player
 	_shield2.player = player
+	
+	Events.connect("quitting", self, "_on_quitting")
 
 
 func _process(delta):
@@ -321,3 +323,7 @@ func _on_Hero_area_exited(area):
 	var monster = area as Monster
 	if monster:
 		_colliding.erase(monster)
+
+
+func _on_quitting():
+	_sfx.stop()
