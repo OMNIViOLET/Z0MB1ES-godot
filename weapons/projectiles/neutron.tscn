@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://weapons/projectiles/projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/gfx/sprites.png" type="Texture" id=2]
+[ext_resource path="res://weapons/projectiles/neutron.gd" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 16.0
+
+[node name="Neutron" instance=ExtResource( 1 )]
+material = SubResource( 3 )
+script = ExtResource( 3 )
+lifetime = 0.5
+
+[node name="Ball1" type="Sprite" parent="." index="0"]
+modulate = Color( 0.7, 1, 0.7, 0.7 )
+material = SubResource( 2 )
+rotation = 0.935496
+scale = Vector2( 0.5, 0.1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 320, 128, 128 )
+
+[node name="Ball2" type="Sprite" parent="." index="1"]
+modulate = Color( 0.7, 1, 0.7, 0.7 )
+material = SubResource( 2 )
+rotation = -0.830777
+scale = Vector2( 0.5, 0.1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 320, 128, 128 )
+
+[node name="Ball3" type="Sprite" parent="." index="2"]
+modulate = Color( 0.7, 1, 0.7, 0.7 )
+material = SubResource( 2 )
+scale = Vector2( 0.5, 0.1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 320, 128, 128 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+rotation = -1.5708
+shape = SubResource( 4 )

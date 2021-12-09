@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/plas2.wav-25f85ebe8e5dead4aafeb8730f42f1a0.sample"
+
+[deps]
+
+source_file="res://assets/sfx/fx/plas2.wav"
+dest_files=[ "res://.import/plas2.wav-25f85ebe8e5dead4aafeb8730f42f1a0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

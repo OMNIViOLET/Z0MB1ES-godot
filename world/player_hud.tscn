@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://text/dynamic_text.gd" type="Script" id=1]
+[ext_resource path="res://world/player_hud.gd" type="Script" id=2]
+[ext_resource path="res://assets/gfx/sprites.png" type="Texture" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="PlayerHud" type="Node2D"]
+script = ExtResource( 2 )
+heroes_path = NodePath("../../Heroes")
+
+[node name="PlayerName" type="Node2D" parent="."]
+material = SubResource( 1 )
+position = Vector2( -109, 50 )
+script = ExtResource( 1 )
+text = "Player1"
+size = 4.0
+
+[node name="Lives" type="Node2D" parent="."]
+material = SubResource( 1 )
+position = Vector2( 105, 50 )
+script = ExtResource( 1 )
+text = "x5"
+size = 4.0
+justify = 1
+
+[node name="Score" type="Node2D" parent="."]
+material = SubResource( 1 )
+position = Vector2( 105, 80 )
+script = ExtResource( 1 )
+text = "0"
+size = 3.0
+justify = 1
+
+[node name="Weapon" type="Sprite" parent="."]
+position = Vector2( -82, 77 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+offset = Vector2( -64, 0 )
+region_enabled = true
+region_rect = Rect2( 0, 1152, 128, 128 )
+
+[node name="Ammo" type="Node2D" parent="."]
+material = SubResource( 1 )
+position = Vector2( -80, 80 )
+script = ExtResource( 1 )
+text = "50"
+size = 3.0
+
+[node name="Initials" type="Node2D" parent="."]
+visible = false
+material = SubResource( 1 )
+position = Vector2( 0, 150 )
+script = ExtResource( 1 )
+text = "AAA"
+size = 8.0
+justify = 2

@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://characters/monsters/monster.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/monsters/little_goo.gd" type="Script" id=2]
+[ext_resource path="res://assets/gfx/little_goo.tres" type="Texture" id=3]
+[ext_resource path="res://characters/legs.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[node name="LittleGoo" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+monster_type = 6
+speed = 75.0
+
+[node name="Legs1" type="Sprite" parent="." index="0"]
+script = ExtResource( 4 )
+speed = 1.2
+
+[node name="Legs2" type="Sprite" parent="." index="1"]
+script = ExtResource( 4 )
+leg_index = 1
+speed = 1.2
+
+[node name="Body" type="Sprite" parent="." index="2"]
+scale = Vector2( 0.3, 0.3 )
+z_index = 2
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource( 1 )

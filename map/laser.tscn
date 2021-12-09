@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://map/laser.gd" type="Script" id=1]
+[ext_resource path="res://assets/gfx/laser.tres" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[node name="Laser" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Laser1" type="Sprite" parent="."]
+material = SubResource( 3 )
+scale = Vector2( 3, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 448, 0 )
+region_rect = Rect2( 0, 704, 1024, 64 )
+
+[node name="Laser2" type="Sprite" parent="."]
+material = SubResource( 3 )
+scale = Vector2( 3, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 448, 0 )
+region_rect = Rect2( 0, 704, 1024, 64 )
+
+[node name="Laser3" type="Sprite" parent="."]
+material = SubResource( 3 )
+scale = Vector2( 3, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 448, 0 )
+region_rect = Rect2( 0, 704, 1024, 64 )
+
+[node name="Laser4" type="Sprite" parent="."]
+material = SubResource( 3 )
+scale = Vector2( 3, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 448, 0 )
+region_rect = Rect2( 0, 704, 1024, 64 )
+
+[node name="Laser5" type="Sprite" parent="."]
+material = SubResource( 3 )
+scale = Vector2( 3, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 448, 0 )
+region_rect = Rect2( 0, 704, 1024, 64 )

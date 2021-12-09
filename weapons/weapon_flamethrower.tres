@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://weapons/weapon_flamethrower.gd" type="Script" id=1]
+[ext_resource path="res://assets/sfx/fx/flame.wav" type="AudioStream" id=2]
+
+[resource]
+script = ExtResource( 1 )
+weapon_type = 3
+sound_effect = ExtResource( 2 )
+volume_db = -20.0
+shoot_frame_time = 0.03

@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://time/time_manager.gd" type="Script" id=1]
+[ext_resource path="res://world/game_world.gd" type="Script" id=2]
+[ext_resource path="res://audio/music_manager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://map/map.tscn" type="PackedScene" id=4]
+[ext_resource path="res://map/map_overlay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://particles/particle_manager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/spawn_manager.gd" type="Script" id=7]
+[ext_resource path="res://world/pause.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/fps.gd" type="Script" id=10]
+[ext_resource path="res://world/player_hud.tscn" type="PackedScene" id=12]
+
+[node name="GameWorld" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="TimeManager" type="Node" parent="Managers"]
+script = ExtResource( 1 )
+music_manager_path = NodePath("../MusicManager")
+
+[node name="MusicManager" parent="Managers" instance=ExtResource( 3 )]
+time_manager_path = NodePath("../TimeManager")
+
+[node name="SpawnManager" type="Node" parent="Managers"]
+script = ExtResource( 7 )
+monster_container_path = NodePath("../../Game/Monsters")
+powerups_container_path = NodePath("../../Game/Powerups")
+world_path = NodePath("../..")
+
+[node name="Game" type="Node2D" parent="."]
+
+[node name="Map" parent="Game" instance=ExtResource( 4 )]
+time_manager_path = NodePath("../../Managers/TimeManager")
+
+[node name="Projectiles" type="Node2D" parent="Game"]
+
+[node name="Particles" parent="Game" instance=ExtResource( 6 )]
+
+[node name="Powerups" type="Node2D" parent="Game"]
+
+[node name="Heroes" type="Node2D" parent="Game"]
+
+[node name="Monsters" type="Node2D" parent="Game"]
+
+[node name="MapOverlay" parent="Game" instance=ExtResource( 5 )]
+material = null
+z_index = 10
+map_path = NodePath("../Map")
+time_manager_path = NodePath("../../Managers/TimeManager")
+
+[node name="Camera2D" type="Camera2D" parent="Game"]
+position = Vector2( 640, 360 )
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 2048
+limit_bottom = 1152
+smoothing_enabled = true
+smoothing_speed = 3.0
+editor_draw_limits = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlayerHUD" type="Node2D" parent="HUD"]
+modulate = Color( 1, 1, 1, 0.8 )
+
+[node name="Player1" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
+position = Vector2( 256, 0 )
+heroes_path = NodePath("../../../Game/Heroes")
+
+[node name="Player2" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
+position = Vector2( 512, 0 )
+slot = 1
+heroes_path = NodePath("../../../Game/Heroes")
+
+[node name="Player3" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
+position = Vector2( 768, 0 )
+slot = 2
+heroes_path = NodePath("../../../Game/Heroes")
+
+[node name="Player4" parent="HUD/PlayerHUD" instance=ExtResource( 12 )]
+position = Vector2( 1024, 0 )
+slot = 3
+heroes_path = NodePath("../../../Game/Heroes")
+
+[node name="FPS" type="Node2D" parent="HUD/PlayerHUD"]
+visible = false
+position = Vector2( 50, 50 )
+script = ExtResource( 10 )
+text = "60"
+size = 3.0
+justify = 2
+flashing = true
+
+[node name="Pause" parent="HUD" instance=ExtResource( 8 )]
+visible = false

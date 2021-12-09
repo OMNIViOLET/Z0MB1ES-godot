@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://text/dynamic_text.gd" type="Script" id=1]
+[ext_resource path="res://world/pause.gd" type="Script" id=2]
+
+[node name="Pause" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Paused" type="Node2D" parent="."]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+position = Vector2( 640, 300 )
+script = ExtResource( 1 )
+text = "paused!!!1"
+size = 11.0
+justify = 2
+
+[node name="Option1" type="Node2D" parent="."]
+position = Vector2( 640, 380 )
+script = ExtResource( 1 )
+text = "resume game"
+size = 6.0
+justify = 2
+
+[node name="Option2" type="Node2D" parent="."]
+position = Vector2( 640, 420 )
+script = ExtResource( 1 )
+text = "quit"
+size = 6.0
+justify = 2
+
+[node name="Ok" type="Node2D" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 440, 620 )
+script = ExtResource( 1 )
+text = "(A) ok"
+size = 6.0
+justify = 2
+
+[node name="Cancel" type="Node2D" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 840, 620 )
+script = ExtResource( 1 )
+text = "(b) cancel"
+size = 6.0
+justify = 2

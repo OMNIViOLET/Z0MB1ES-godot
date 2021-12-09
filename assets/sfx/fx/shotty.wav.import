@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shotty.wav-f48d8668f81cfa96076a26fbc0f2db19.sample"
+
+[deps]
+
+source_file="res://assets/sfx/fx/shotty.wav"
+dest_files=[ "res://.import/shotty.wav-f48d8668f81cfa96076a26fbc0f2db19.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

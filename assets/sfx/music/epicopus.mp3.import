@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/epicopus.mp3-b5a3ae5acf78ceb3b9e951aafed952d7.mp3str"
+
+[deps]
+
+source_file="res://assets/sfx/music/epicopus.mp3"
+dest_files=[ "res://.import/epicopus.mp3-b5a3ae5acf78ceb3b9e951aafed952d7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
