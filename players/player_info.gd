@@ -2,7 +2,8 @@ class_name PlayerInfo
 
 enum DeviceType {
 	KEYBOARD,
-	JOYPAD
+	JOYPAD,
+	MOBILE
 }
 
 enum PlayerState {

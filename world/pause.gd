@@ -62,7 +62,7 @@ func _input(event):
 				Events.emit_signal("quitting")
 				Players.reset_players()
 				get_tree().paused = false
-				get_tree().change_scene("res://menu/main_menu.tscn")
+				_exit()
 	elif Input.is_action_just_pressed("cancel"):
 		if event.device == 0:
 			_primary_device_type = device_type
@@ -77,3 +77,10 @@ func show_pause():
 func hide_pause():
 	visible = false
 	get_tree().paused = false
+
+
+func _exit():
+	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		get_tree().change_scene("res://menu/main_menu_mobile.tscn")
+	else:
+		get_tree().change_scene("res://menu/main_menu.tscn")

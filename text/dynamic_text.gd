@@ -17,6 +17,8 @@ export(float) var flash_color_min = 0.5
 export(float) var flash_color_max = 1.0
 export(float) var flash_color_alpha = 1.0
 
+var bounds = Rect2()
+
 var _shapes = []
 var _shape_map = {}
 var _width = 0
@@ -68,6 +70,7 @@ func set_score(score: int):
 func _set_text(value: String):
 	text = value
 	_get_shapes()
+	_update_bounds()
 	update()
 
 
@@ -77,6 +80,7 @@ func _get_text() -> String:
 
 func _set_justify(value: int):
 	justify = value
+	_update_bounds()
 	update()
 
 
@@ -105,6 +109,7 @@ func _get_flashing_character() -> int:
 func _set_text_size(value: float):
 	size = value
 	_get_shapes()
+	_update_bounds()
 	update()
 
 
@@ -225,4 +230,18 @@ func _create_text_shapes():
 	_add_shape('(', [ 00001, 00010, 00010, 00010, 00001 ])
 	_add_shape(')', [ 00010, 00001, 00001, 00001, 00010 ])
 	_add_shape('=', [ 00000, 11111, 00000, 11111, 00000 ])
+
+
+func _update_bounds():
+	if not is_inside_tree():
+		return
+		
+	var loc = global_position
+	match justify:
+		Justify.RIGHT:
+			loc.x -= _width
+		Justify.CENTER:
+			loc.x -= _width * 0.5
+	loc.y -= size * 2.5
 	
+	bounds = Rect2(loc, Vector2(_width, size * 5.0))

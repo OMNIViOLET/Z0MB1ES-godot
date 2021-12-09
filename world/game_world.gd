@@ -3,6 +3,9 @@ class_name GameWorld
 
 var HERO = load("res://characters/hero.tscn")
 
+var _last_analog_traj = Vector2.ZERO
+var _last_analog_shoot = Vector2.ZERO
+
 onready var _game := $Game
 onready var _camera := $Game/Camera2D
 onready var _heroes := $Game/Heroes
@@ -31,7 +34,11 @@ func _process(delta):
 	_adjust_camera(delta)
 	_check_game_over()
 	
+	if _time_manager._play_mode == TimeManager.PlayMode.PAUSED and not get_tree().paused:
+		_time_manager.resume()
+	
 	if Input.is_action_just_pressed("pause") and not get_tree().paused:
+		_time_manager.pause()
 		_pause.show_pause()
 
 

@@ -28,8 +28,8 @@ func render(particle: Particle):
 	particle.texture = MUZZLE_FLASHES[particle.flags]
 	particle.modulate = Color(
 		1.0, 
-		particle.lifetime * 40.0,
-		particle.lifetime * 20.0, 
-		particle.lifetime * 10.0
+		min(1.0, particle.lifetime * 40.0),
+		min(1.0, particle.lifetime * 20.0), 
+		min(1.0, particle.lifetime * 10.0)
 	)
 	particle.scale = Vector2(particle.size, particle.size)

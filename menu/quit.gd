@@ -47,6 +47,13 @@ func _input(event):
 			0:
 				get_tree().quit()
 			1:
-				get_tree().change_scene("res://menu/main_menu.tscn")
+				_exit()
 	elif Input.is_action_just_pressed("cancel"):
+		_exit()
+
+
+func _exit():
+	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		get_tree().change_scene("res://menu/main_menu_mobile.tscn")
+	else:
 		get_tree().change_scene("res://menu/main_menu.tscn")
