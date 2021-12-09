@@ -5,7 +5,7 @@ This is a [Godot Engine](https://godotengine.org/) port of the classic XNA/Xbox 
 
 Ported from the original XNA/C# source to Godot/GDScript by [deadpixelsociety](https://twitter.com/deadpxlsociety)
 
-Play testing and feedback provided by [OMNIViOLET Studio](https://twitter.com/OmnivioletS). Make sure to check out their Steam port of this game to  over [here](https://store.steampowered.com/app/1800730/I_MAED_A_GAM3_W1TH_Z0MB1ES_1N_IT1/). Thanks for the help!
+Play testing and feedback provided by [OMNIViOLET Studio](https://twitter.com/OmnivioletS). Make sure to check out their Steam port of this game over [here](https://store.steampowered.com/app/1800730/I_MAED_A_GAM3_W1TH_Z0MB1ES_1N_IT1/). Thanks for the help!
 
 The source code for this port is being released to the public and the Godot community under the MIT license, free to use however you wish except for the assets (graphics, sounds and music) as noted below.
 
